@@ -74,7 +74,7 @@ function CartItem(props) {
             <Quantity value={quantity} onChange={(value) => updateQuantity(key, value)} />
           </Col>
           {/*  */}
-          <TouchableOpacity style={{marginTop:-10, marginRight:-10}}>
+          <TouchableOpacity style={{ marginTop: -10, marginRight: -10 }}>
             <Icon name="x" type="feather" size={25} />
           </TouchableOpacity>
         </Row>

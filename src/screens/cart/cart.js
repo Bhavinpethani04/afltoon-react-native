@@ -109,7 +109,7 @@ function CartScreen(props) {
   const goToProduct = (productId) => navigation.navigate(mainStack.product, { id: productId, type: 'product' });
 
   return (
-    <ThemedView isFullView>
+    <ThemedView style={{ backgroundColor: 'rgba(251,251,251,1)', height: '100%', width: '100%' }} isFullView>
       <Loading visible={loadingRemove || loadingUpdate} />
       <Header
         centerComponent={
@@ -186,6 +186,7 @@ function CartScreen(props) {
                     <Button
                       title={t('cart:text_go_checkout')}
                       buttonStyle={styles.checkOutButton}
+                      titleStyle={{ width: '100%' }}
                       onPress={() => {
                         if (siteConfigs?.enable_guest_checkout === 'no' && !isLogin) {
                           navigation.navigate(authStack.login);
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
     marginVertical: margin.base,
   },
   viewTotal: {
+    marginTop: margin.large,
     marginBottom: margin.large - 2,
   },
   viewButton: {
@@ -221,23 +223,27 @@ const styles = StyleSheet.create({
   footerScrollview: {
     marginVertical: margin.large,
     height: 75,
+    width: '100%',
+    position: "absolute",
+    bottom: -20,
+    backgroundColor: 'white',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: "gray",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: -2,
     },
-    shadowOpacity: 0.30,
+    shadowOpacity: 0.1,
     shadowRadius: 25,
 
     elevation: 5,
   },
   checkOutButton: {
     alignSelf: 'center',
-    width: '115%',
+    width: '90%',
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
