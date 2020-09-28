@@ -145,6 +145,7 @@ function CartScreen(props) {
                           currency={currency}
                           updateQuantity={updateQuantity}
                           goToProduct={goToProduct}
+                          deleteProduct={() => notificationDeleteItem(item.key)}
                           style={index === 0 && styles.firstItem}
                         />
                       )

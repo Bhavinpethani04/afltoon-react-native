@@ -24,7 +24,7 @@ const getUrlImage = thumb => {
 };
 
 function CartItem(props) {
-  const { item, currency, updateQuantity, goToProduct, style } = props;
+  const { item, currency, updateQuantity, goToProduct, style, deleteProduct } = props;
   if (!item) {
     return null;
   }
@@ -74,7 +74,7 @@ function CartItem(props) {
             <Quantity value={quantity} onChange={(value) => updateQuantity(key, value)} />
           </Col>
           {/*  */}
-          <TouchableOpacity style={{ marginTop: -10, marginRight: -10 }}>
+          <TouchableOpacity onPress={()=>deleteProduct()} style={{ marginTop: -10, marginRight: -10 }}>
             <Icon name="x" type="feather" size={25} />
           </TouchableOpacity>
         </Row>
