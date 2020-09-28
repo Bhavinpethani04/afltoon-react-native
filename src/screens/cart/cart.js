@@ -1,12 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {useTranslation} from 'react-i18next';
+import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import values from 'lodash/values';
 import includes from 'lodash/includes';
-import {StyleSheet, View, ActivityIndicator, I18nManager, Alert} from 'react-native';
-import {SwipeListView} from 'react-native-swipe-list-view';
-import {ThemedView, Header, Button, Loading} from 'src/components';
-import {TextHeader} from 'src/containers/HeaderComponent';
+import { StyleSheet, View, ActivityIndicator, I18nManager, Alert, FlatList } from 'react-native';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { ThemedView, Header, Button, Loading } from 'src/components';
+import { TextHeader } from 'src/containers/HeaderComponent';
 import ButtonSwiper from 'src/containers/ButtonSwiper';
 import Container from 'src/containers/Container';
 import Empty from 'src/containers/Empty';
@@ -14,7 +14,7 @@ import CartTotal from './containers/CartTotal';
 import CartItem from './containers/CartItem';
 import Coupon from './containers/Coupon';
 
-import {getCart, removeFromCart, updateQuantityCart} from 'src/modules/cart/actions';
+import { getCart, removeFromCart, updateQuantityCart } from 'src/modules/cart/actions';
 import {
   cartSelector,
   cartTotalSelector,
@@ -23,17 +23,17 @@ import {
   loadingRemoveItemSelector,
   loadingUpdateQuantitySelector,
 } from 'src/modules/cart/selectors';
-import {configsSelector, currencySelector, getSiteConfig} from 'src/modules/common/selectors';
-import {addWishList, removeWishList} from 'src/modules/common/actions';
-import {wishListSelector} from 'src/modules/common/selectors';
-import {isLoginSelector} from 'src/modules/auth/selectors';
+import { configsSelector, currencySelector, getSiteConfig } from 'src/modules/common/selectors';
+import { addWishList, removeWishList } from 'src/modules/common/actions';
+import { wishListSelector } from 'src/modules/common/selectors';
+import { isLoginSelector } from 'src/modules/auth/selectors';
 
-import {homeTabs, mainStack, authStack} from 'src/config/navigator';
+import { homeTabs, mainStack, authStack } from 'src/config/navigator';
 
-import {margin} from 'src/components/config/spacing';
+import { margin } from 'src/components/config/spacing';
 
 function CartScreen(props) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const {
     data,
     totals,
@@ -55,8 +55,8 @@ function CartScreen(props) {
 
   const subtitleHeader =
     count > 1
-      ? t('common:text_items', {count})
-      : t('common:text_item', {count});
+      ? t('common:text_items', { count })
+      : t('common:text_item', { count });
   const lists =
     typeof data === 'object'
       ? values(data).filter(value => typeof value === 'object')
@@ -94,19 +94,19 @@ function CartScreen(props) {
       [
         {
           text: 'Cancel',
-          onPress: () => {},
+          onPress: () => { },
           style: 'cancel',
         },
         {
           text: 'OK',
-          onPress: () => dispatch(removeFromCart({cart_item_key: key})),
+          onPress: () => dispatch(removeFromCart({ cart_item_key: key })),
         },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
 
-  const goToProduct = (productId) => navigation.navigate(mainStack.product, {id: productId, type: 'product'});
+  const goToProduct = (productId) => navigation.navigate(mainStack.product, { id: productId, type: 'product' });
 
   return (
     <ThemedView isFullView>
@@ -124,18 +124,33 @@ function CartScreen(props) {
           <ActivityIndicator size="small" />
         </View>
       ) : (
-        <>
-          {count < 1 ? (
-            <Empty
-              icon="shopping-bag"
-              title={t('empty:text_title_cart')}
-              subTitle={t('empty:text_subtitle_cart')}
-              clickButton={() => navigation.navigate(homeTabs.shop)}
-            />
-          ) : (
-            <>
-              <CartTotal style={styles.viewTotal} totals={totals} currency={currency}/>
-              <SwipeListView
+          <>
+            {count < 1 ? (
+              <Empty
+                icon="shopping-bag"
+                title={t('empty:text_title_cart')}
+                subTitle={t('empty:text_subtitle_cart')}
+                clickButton={() => navigation.navigate(homeTabs.shop)}
+              />
+            ) : (
+                <>
+                  <CartTotal style={styles.viewTotal} totals={totals} currency={currency} />
+                  <FlatList
+                    data={lists}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item, index }) => {
+                      return (
+                        <CartItem
+                          item={item}
+                          currency={currency}
+                          updateQuantity={updateQuantity}
+                          goToProduct={goToProduct}
+                          style={index === 0 && styles.firstItem}
+                        />
+                      )
+                    }}
+                  />
+                  {/* <SwipeListView
                 useFlatList
                 removeClippedSubviews={false}
                 keyExtractor={item => item.key}
@@ -166,26 +181,27 @@ function CartScreen(props) {
                     <Coupon />
                   </Container>
                 }
-              />
-              <Container style={styles.footerScrollview}>
-                <Button
-                  title={t('cart:text_go_checkout')}
-                  onPress={() => {
-                    if (siteConfigs?.enable_guest_checkout === 'no' && !isLogin) {
-                      navigation.navigate(authStack.login);
-                    } else {
-                      navigation.navigate(mainStack.webview_checkout);
-                      // navigation.navigate(
-                      //   webviewCheckout ? mainStack.webview_checkout : mainStack.checkout,
-                      // );
-                    }
-                  }}
-                />
-              </Container>
-            </>
-          )}
-        </>
-      )}
+              /> */}
+                  <Container style={styles.footerScrollview}>
+                    <Button
+                      title={t('cart:text_go_checkout')}
+                      buttonStyle={styles.checkOutButton}
+                      onPress={() => {
+                        if (siteConfigs?.enable_guest_checkout === 'no' && !isLogin) {
+                          navigation.navigate(authStack.login);
+                        } else {
+                          navigation.navigate(mainStack.webview_checkout);
+                          // navigation.navigate(
+                          //   webviewCheckout ? mainStack.webview_checkout : mainStack.checkout,
+                          // );
+                        }
+                      }}
+                    />
+                  </Container>
+                </>
+              )}
+          </>
+        )}
     </ThemedView>
   )
 }
@@ -204,7 +220,28 @@ const styles = StyleSheet.create({
   },
   footerScrollview: {
     marginVertical: margin.large,
+    height: 75,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "gray",
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 25,
+
+    elevation: 5,
   },
+  checkOutButton: {
+    alignSelf: 'center',
+    width: '115%',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 const mapStateToProps = (state) => ({
