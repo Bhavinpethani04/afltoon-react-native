@@ -1,25 +1,25 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
-import {StyleSheet, ScrollView, View, Linking} from 'react-native';
-import {Header, ThemedView, Text} from 'src/components';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { StyleSheet, ScrollView, View, Linking } from 'react-native';
+import { Header, ThemedView, Text } from 'src/components';
 
 import HeaderMe from './containers/HeaderMe';
 import SettingMe from './containers/SettingMe';
 import InformationMe from './containers/InformationMe';
 import Container from 'src/containers/Container';
 import SocialIcon from 'src/containers/SocialIcon';
-import {TextHeader, CartIcon} from 'src/containers/HeaderComponent';
+import { TextHeader, CartIcon } from 'src/containers/HeaderComponent';
 
-import {authSelector} from 'src/modules/auth/selectors';
+import { authSelector } from 'src/modules/auth/selectors';
 import {
   wishListSelector,
   configsSelector,
   languageSelector,
 } from 'src/modules/common/selectors';
 
-import {grey5} from 'src/components/config/colors';
-import {margin} from 'src/components/config/spacing';
+import { grey5 } from 'src/components/config/colors';
+import { margin } from 'src/components/config/spacing';
 
 class MeScreen extends Component {
   icon = (name) => {
@@ -42,7 +42,7 @@ class MeScreen extends Component {
     const {
       t,
       configs,
-      auth: {isLogin},
+      auth: { isLogin },
       language,
     } = this.props;
 
@@ -63,47 +63,33 @@ class MeScreen extends Component {
               phonenumber={configs.get('phone')}
             />
             <View style={styles.viewSocial}>
-              <SocialIcon
-                light
-                raised={false}
-                type="facebook"
-                style={styles.socialIconStyle}
-                iconSize={15}
-                onPress={() => this.handleLinkUrl(configs.get('facebook'))}
-              />
 
               <SocialIcon
-                light
-                raised={false}
-                type="instagram"
-                style={styles.socialIconStyle}
-                iconSize={15}
-                onPress={() => this.handleLinkUrl(configs.get('instagram'))}
-              />
-
-              <SocialIcon
-                light
-                raised={false}
-                type="pinterest"
-                style={styles.socialIconStyle}
-                iconSize={15}
-                onPress={() => this.handleLinkUrl(configs.get('pinterest'))}
-              />
-
-              <SocialIcon
-                light
                 raised={false}
                 type="twitter"
                 style={styles.socialIconStyle}
                 iconSize={15}
                 onPress={() => this.handleLinkUrl(configs.get('twitter'))}
               />
+
+
+              <SocialIcon
+                raised={false}
+                type="google-plus-square"
+                style={styles.socialIconStyle}
+                iconSize={15}
+                onPress={() => this.handleLinkUrl(configs.get('facebook'))}
+              />
+
+              <SocialIcon
+                raised={false}
+                type="linkedin"
+                style={styles.socialIconStyle}
+                iconSize={15}
+                onPress={() => this.handleLinkUrl(configs.get('instagram'))}
+              />
+
             </View>
-            <Text h6 colorThird>
-              {typeof configs.get('copyright') === 'string'
-                ? configs.get('copyright')
-                : configs.getIn(['copyright', language])}
-            </Text>
           </Container>
         </ScrollView>
       </ThemedView>
@@ -122,12 +108,13 @@ const styles = StyleSheet.create({
     marginVertical: margin.large + 4,
   },
   socialIconStyle: {
-    width: 32,
-    height: 32,
+    width: 36,
+    height: 36,
     margin: 0,
     marginHorizontal: margin.small / 2,
     paddingTop: 0,
     paddingBottom: 0,
+    borderRadius: 36 / 2
   },
 });
 
