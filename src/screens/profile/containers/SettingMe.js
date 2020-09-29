@@ -43,20 +43,6 @@ const SettingMe = ({
         pad={padding.large}
         onPress={() => clickPage(mainStack.help)}
       />
-      <ListItem
-        leftIcon={icon(2)}
-        title={t('profile:text_hotline')}
-        rightElement={
-          <Text colorThird style={styles.phone}>
-            {phonenumber}
-          </Text>
-        }
-        type="underline"
-        titleProps={titleProps}
-        pad={padding.large}
-        containerStyle={!isLogin && styles.itemEnd}
-        onPress={() => goPhone(`tel:${phonenumber}`)}
-      />
       {isLogin && (
         <ListItem
           leftIcon={icon(3)}

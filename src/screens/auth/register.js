@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import firebase from '@react-native-firebase/app';
 
 import {
@@ -11,6 +11,7 @@ import {
   Switch,
   KeyboardAvoidingView,
   Platform,
+  TextInput, TouchableOpacity
 } from 'react-native';
 import {
   Header,
@@ -24,22 +25,27 @@ import Container from 'src/containers/Container';
 import Input from 'src/containers/input/Input';
 import InputMobile from 'src/containers/input/InputMobile';
 import TextHtml from 'src/containers/TextHtml';
-import {TextHeader, IconHeader} from 'src/containers/HeaderComponent';
+import { TextHeader, IconHeader } from 'src/containers/HeaderComponent';
 import ModalVerify from './containers/ModalVerify';
 import SocialMethods from './containers/SocialMethods';
+import SocialIcon from 'src/containers/SocialIcon';
 
-import {signUpWithEmail} from 'src/modules/auth/actions';
-import {authSelector} from 'src/modules/auth/selectors';
-import {configsSelector, languageSelector} from 'src/modules/common/selectors';
-import {checkPhoneNumber} from 'src/modules/auth/service';
+import { signUpWithEmail } from 'src/modules/auth/actions';
+import { authSelector } from 'src/modules/auth/selectors';
+import { configsSelector, languageSelector } from 'src/modules/common/selectors';
+import { checkPhoneNumber } from 'src/modules/auth/service';
 
-import {authStack} from 'src/config/navigator';
-import {margin, padding} from 'src/components/config/spacing';
-import {lineHeights} from 'src/components/config/fonts';
-import {changeColor} from 'src/utils/text-html';
-import {showMessage} from 'react-native-flash-message';
-import {INITIAL_COUNTRY} from 'src/config/config-input-phone-number';
-import {formatPhoneWithCountryCode} from 'src/utils/phone-formatter';
+import { authStack } from 'src/config/navigator';
+import { margin, padding } from 'src/components/config/spacing';
+import { lineHeights } from 'src/components/config/fonts';
+import { changeColor } from 'src/utils/text-html';
+import { showMessage } from 'react-native-flash-message';
+import { INITIAL_COUNTRY } from 'src/config/config-input-phone-number';
+import { formatPhoneWithCountryCode } from 'src/utils/phone-formatter';
+
+import Icon from '../../components/icons/Icon'
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 class RegisterScreen extends React.Component {
   constructor(props, context) {
@@ -64,6 +70,7 @@ class RegisterScreen extends React.Component {
         message: null,
         errors: null,
       },
+      isPasswordShow: true
     };
     this.confirmation = null;
   }
@@ -71,10 +78,10 @@ class RegisterScreen extends React.Component {
   componentDidMount() {
     this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        const {data} = this.state;
+        const { data } = this.state;
         this.setState({
           user,
-          data: {...data, phone_number: user.phoneNumber},
+          data: { ...data, phone_number: user.phoneNumber },
         });
       }
       if (this.state.confirmResult && Platform.OS === 'android') {
@@ -98,11 +105,16 @@ class RegisterScreen extends React.Component {
     });
   };
 
+
+  handleLinkUrl = (url) => {
+    Linking.openURL(url);
+  };
+
   register = () => {
-    const {enablePhoneNumber} = this.props;
-    const {data} = this.state;
+    const { enablePhoneNumber } = this.props;
+    const { data } = this.state;
     let payload = data;
-    const {country_code} = data;
+    const { country_code } = data;
     if (enablePhoneNumber) {
       const currentUser = firebase.auth().currentUser;
 
@@ -116,7 +128,7 @@ class RegisterScreen extends React.Component {
         digits_phone_no: data.phone_number,
       });
     }
-    this.setState({loading: false});
+    this.setState({ loading: false });
     this.props.dispatch(signUpWithEmail(payload));
   };
 
@@ -128,9 +140,9 @@ class RegisterScreen extends React.Component {
       loading: true,
     });
     try {
-      const {enablePhoneNumber} = this.props;
-      const {data, user} = this.state;
-      const {phone_number, country_code} = data;
+      const { enablePhoneNumber } = this.props;
+      const { data, user } = this.state;
+      const { phone_number, country_code } = data;
       // Register with phone number
       if (enablePhoneNumber) {
 
@@ -171,7 +183,7 @@ class RegisterScreen extends React.Component {
   render() {
     const {
       navigation,
-      auth: {pending},
+      auth: { pending },
       enablePhoneNumber,
       t,
     } = this.props;
@@ -186,7 +198,7 @@ class RegisterScreen extends React.Component {
         password,
         subscribe,
       },
-      error: {message, errors},
+      error: { message, errors },
       visibleModal,
       loading,
       user,
@@ -195,12 +207,12 @@ class RegisterScreen extends React.Component {
     const visible = visibleModal || !!(!user && confirmResult);
     return (
       <ThemeConsumer>
-        {({theme}) => (
+        {({ theme }) => (
           <ThemedView isFullView>
             <Loading visible={pending} />
             <Header
               leftComponent={<IconHeader />}
-              centerComponent={<TextHeader title={t('common:text_register')} />}
+            // centerComponent={<TextHeader title={t('common:text_register')} />}
             />
             <KeyboardAvoidingView behavior="height" style={styles.keyboard}>
               <ScrollView>
@@ -211,7 +223,9 @@ class RegisterScreen extends React.Component {
                       style={changeColor(theme.colors.error)}
                     />
                   ) : null}
-                  <Input
+
+                  <Text style={styles.signUpLebel}>Sign Up</Text>
+                  {/* <Input
                     label={t('auth:text_input_first_name')}
                     value={first_name}
                     onChangeText={(value) =>
@@ -255,31 +269,101 @@ class RegisterScreen extends React.Component {
                     secureTextEntry
                     onChangeText={(value) => this.changeData({password: value})}
                     error={errors && errors.password}
-                  />
+                  /> */}
+
+
+                  <Text style={styles.textInputLabel} >Name</Text>
+                  <TextInput
+                    placeholder={'Username'}
+                    value={first_name}
+                    onChangeText={(value) =>
+                      this.changeData({ first_name: value })
+                    }
+                    style={styles.textInputOuterStyle} >
+                  </TextInput>
+
+                  <Text style={styles.textInputLabel} >Email</Text>
+                  <TextInput
+                    placeholder={'Username'}
+                    value={last_name}
+                    onChangeText={(value) =>
+                      this.changeData({ last_name: value })
+                    }
+                    style={styles.textInputOuterStyle} >
+                  </TextInput>
+
+
+                  <Text style={styles.textInputLabel} >Password</Text>
+                  <View style={styles.textInputOuterStyle}>
+                    <TextInput
+                      placeholder={'Password'}
+                      value={password}
+                      secureTextEntry={this.state.isPasswordShow}
+                      onChangeText={(value) => this.changeData({ password: value })}
+                      style={styles.passWordTextInput} >
+                    </TextInput>
+                    <TouchableOpacity onPress={() => this.setState({ isPasswordShow: !this.state.isPasswordShow })} >
+                      <Icon name={this.state.isPasswordShow ? 'eye' : 'eye-off'} size={20} ></Icon>
+                    </TouchableOpacity>
+                  </View>
+
+
+
                   <View style={styles.viewSwitch}>
-                    <Text style={styles.textSwitch} colorSecondary>
-                      {t('auth:text_agree_register')}
-                    </Text>
                     <Switch
                       value={subscribe}
                       onValueChange={(value) =>
-                        this.changeData({subscribe: value})
+                        this.changeData({ subscribe: value })
                       }
                     />
+                    <Text style={styles.textSwitch} colorSecondary>
+                      I accept the terms and conditions
+                    </Text>
                   </View>
                   <Button
                     title={t('auth:text_register')}
+                    buttonStyle={{ borderRadius: 5 }}
                     onPress={this.handleRegister}
                     loading={loading || pending}
                   />
-                  <SocialMethods style={styles.viewAccount} />
-                  <Text
+
+                  <View style={styles.viewSocial}>
+
+                    <SocialIcon
+                      raised={false}
+                      type="twitter"
+                      style={styles.socialIconStyle}
+                      iconSize={15}
+                      onPress={() => this.handleLinkUrl(configs.get('twitter'))}
+                    />
+
+
+                    <SocialIcon
+                      raised={false}
+                      type="google-plus-square"
+                      style={styles.socialIconStyle}
+                      iconSize={15}
+                      onPress={() => this.handleLinkUrl(configs.get('facebook'))}
+                    />
+
+                    <SocialIcon
+                      raised={false}
+                      type="linkedin"
+                      style={styles.socialIconStyle}
+                      iconSize={15}
+                      onPress={() => this.handleLinkUrl(configs.get('instagram'))}
+                    />
+
+                  </View>
+                  {/* <SocialMethods style={styles.viewAccount} /> */}
+
+                  {/* <Text
                     medium
                     style={styles.textHaveAccount}
                     onPress={() => navigation.navigate(authStack.login)}>
                     {t('auth:text_already_account')}
-                  </Text>
-                  <ModalVerify
+                  </Text> */}
+                  {/* <ModalVerify
                     visible={visible}
                     type={'register'}
                     phone={
@@ -296,7 +380,7 @@ class RegisterScreen extends React.Component {
                         confirmResult: null,
                       })
                     }
-                  />
+                  /> */}
                 </Container>
               </ScrollView>
             </KeyboardAvoidingView>
@@ -314,12 +398,14 @@ const styles = StyleSheet.create({
   viewSwitch: {
     marginVertical: margin.big,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   textSwitch: {
-    flex: 1,
     lineHeight: lineHeights.h4,
-    marginRight: margin.large,
+    marginLeft: 15,
+    color: '#000',
+    fontSize: hp(1.5)
   },
   viewAccount: {
     marginVertical: margin.big,
@@ -329,6 +415,41 @@ const styles = StyleSheet.create({
     marginTop: margin.base,
     marginBottom: margin.big,
     textAlign: 'center',
+  },
+
+  signUpLebel: {
+    fontSize: hp(5), marginVertical: hp(5)
+  },
+
+  textInputLabel: {
+    marginTop: 10,
+    fontSize: hp(2.2)
+  },
+  textInputOuterStyle: {
+    width: '100%', height: hp(6), borderBottomColor: '#000', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
+  },
+  passWordTextInput: {
+    width: '85%',
+    height: hp(6)
+  },
+
+  viewSocial: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '46%',
+    alignSelf: 'center',
+    marginTop: hp(3)
+  },
+
+  socialIconStyle: {
+    width: 36,
+    height: 36,
+    margin: 0,
+    marginHorizontal: margin.small / 2,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderRadius: 36 / 2
   },
 });
 

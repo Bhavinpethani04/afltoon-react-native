@@ -2,16 +2,18 @@ import * as React from 'react';
 import split from 'lodash/split';
 import unescape from 'lodash/unescape';
 
-import {StyleSheet, View} from 'react-native';
-import {Text, Image, ThemeConsumer} from 'src/components';
-import {Row, Col} from 'src/containers/Gird';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, Image, ThemeConsumer } from 'src/components';
+import { Row, Col } from 'src/containers/Gird';
 import Quantity from 'src/containers/Quantity';
 
-import {grey4} from 'src/components/config/colors';
-import {lineHeights, sizes} from 'src/components/config/fonts';
-import {margin, padding} from 'src/components/config/spacing';
+import { grey4 } from 'src/components/config/colors';
+import { lineHeights, sizes } from 'src/components/config/fonts';
+import { margin, padding } from 'src/components/config/spacing';
+
 
 import currencyFormatter from 'src/utils/currency-formatter';
+import { Icon } from '../../../components/icons/Icon';
 
 const getUrlImage = thumb => {
   if (!thumb || typeof thumb !== 'string') {
@@ -22,7 +24,7 @@ const getUrlImage = thumb => {
 };
 
 function CartItem(props) {
-  const {item, currency, updateQuantity, goToProduct, style} = props;
+  const { item, currency, updateQuantity, goToProduct, style, deleteProduct } = props;
   if (!item) {
     return null;
   }
@@ -38,18 +40,19 @@ function CartItem(props) {
   const image = thumb || getUrlImage(thumbnail);
   return (
     <ThemeConsumer>
-      {({theme}) => (
+      {({ theme }) => (
         <Row
           style={[
             styles.container,
             {
               backgroundColor: theme.colors.bgColor,
               borderColor: theme.colors.border,
+
             },
             style && style,
           ]}>
           <Image
-            source={image ? {uri: image} : require('src/assets/images/pDefault.png')}
+            source={image ? { uri: image } : require('src/assets/images/pDefault.png')}
             style={styles.image}
           />
           <Col style={styles.content}>
@@ -60,15 +63,20 @@ function CartItem(props) {
                 style={styles.title}>
                 {unescape(name)}
               </Text>
+              <Text medium>{currencyFormatter(line_subtotal / quantity, currency)}</Text>
+
               <Row style={styles.viewAttribute}>
                 {/*{meta_data.map((data, index) =>*/}
                 {/*  this.renderVariation(data, index),*/}
                 {/*)}*/}
               </Row>
             </View>
-            <Quantity value={quantity} onChange={(value) => updateQuantity(key, value)}/>
+            <Quantity value={quantity} onChange={(value) => updateQuantity(key, value)} />
           </Col>
-          <Text medium>{currencyFormatter(line_subtotal / quantity, currency)}</Text>
+          {/*  */}
+          <TouchableOpacity onPress={()=>deleteProduct()} style={{ marginTop: -10, marginRight: -10 }}>
+            <Icon name="x" type="feather" size={25} />
+          </TouchableOpacity>
         </Row>
       )}
     </ThemeConsumer>
@@ -77,13 +85,23 @@ function CartItem(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 0,
-    marginRight: 0,
+    marginLeft: 15,
+    marginRight: 15,
     padding: padding.large,
     borderBottomWidth: 1,
+
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 3.84,
+
+    elevation: 10,
   },
   image: {
-    width: 80,
+    width: 107,
     height: 107,
   },
   content: {
