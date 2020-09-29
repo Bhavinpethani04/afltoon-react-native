@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     padding: padding.large,
     borderBottomWidth: 1,
 
-    shadowColor: "gray",
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.30,
     shadowRadius: 3.84,
 
-    elevation: 5,
+    elevation: 10,
   },
   image: {
     width: 107,

@@ -109,7 +109,7 @@ function CartScreen(props) {
   const goToProduct = (productId) => navigation.navigate(mainStack.product, { id: productId, type: 'product' });
 
   return (
-    <ThemedView style={{ backgroundColor: 'rgba(251,251,251,1)', height: '100%', width: '100%' }} isFullView>
+    <ThemedView style={{ backgroundColor: 'rgba(250,250,250,1)', height: '100%', width: '100%' }} isFullView>
       <Loading visible={loadingRemove || loadingUpdate} />
       <Header
         centerComponent={
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: "absolute",
     bottom: -20,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255,255,255,1)',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     alignItems: 'center',
@@ -237,10 +237,10 @@ const styles = StyleSheet.create({
       width: 0,
       height: -2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 25,
 
-    elevation: 5,
+    elevation: 8,
   },
   checkOutButton: {
     alignSelf: 'center',
