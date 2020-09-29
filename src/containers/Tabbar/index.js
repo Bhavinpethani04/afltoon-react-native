@@ -67,7 +67,7 @@ const Tabbar = (props) => {
             tab.isShow ? (
               <TouchableOpacity
                 key={index}
-                style={styles.item}
+                style={[styles.item,{backgroundColor: visit === index ? '#EEEEEE' : 'transparent'}]}
                 onPress={() => navigation.navigate(tab.router)}>
                 <IconTabbar
                   name={tab.iconName}
