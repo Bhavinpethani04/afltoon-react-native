@@ -1,26 +1,26 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import isEqual from 'lodash/isEqual';
-import {StyleSheet, View, ActivityIndicator, I18nManager} from 'react-native';
-import {Header, ThemedView} from 'src/components';
-import {SwipeListView} from 'react-native-swipe-list-view';
+import { StyleSheet, View, ActivityIndicator, I18nManager, FlatList } from 'react-native';
+import { Header, ThemedView } from 'src/components';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import ProductItem from 'src/containers/ProductItem';
-import {TextHeader, CartIcon} from 'src/containers/HeaderComponent';
+import { TextHeader, CartIcon } from 'src/containers/HeaderComponent';
 import Empty from 'src/containers/Empty';
 import ButtonSwiper from 'src/containers/ButtonSwiper';
 
-import {removeWishList} from 'src/modules/common/actions';
-import {fetchWishList} from 'src/modules/product/actions';
+import { removeWishList } from 'src/modules/common/actions';
+import { fetchWishList } from 'src/modules/product/actions';
 import {
   loadingWishListSelector,
   dataWishListSelector,
 } from 'src/modules/product/selectors';
 
-import {wishListSelector, countWishListSelector} from 'src/modules/common/selectors';
+import { wishListSelector, countWishListSelector } from 'src/modules/common/selectors';
 
-import {margin} from 'src/components/config/spacing';
-import {homeTabs} from 'src/config/navigator';
+import { margin } from 'src/components/config/spacing';
+import { homeTabs } from 'src/config/navigator';
 
 class WishListScreen extends React.Component {
   componentDidMount() {
@@ -28,23 +28,23 @@ class WishListScreen extends React.Component {
   }
 
   fetchData = (data = this.props.wishList) => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(fetchWishList(data));
   };
 
   removeItem = (product_id) => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(removeWishList(product_id));
   };
 
   componentDidUpdate(prevProps) {
-    const {wishList} = this.props;
+    const { wishList } = this.props;
     if (!isEqual(wishList, prevProps.wishList)) {
       this.fetchData(wishList);
     }
   }
   renderData = (data) => {
-    const {t, navigation} = this.props;
+    const { t, navigation } = this.props;
     if (!data || data.length < 1) {
       return (
         <Empty
@@ -57,37 +57,51 @@ class WishListScreen extends React.Component {
       );
     }
     return (
-      <SwipeListView
-        useFlatList
-        keyExtractor={(item) => `${item.id}`}
+
+      <FlatList
         data={data}
-        renderItem={({item, index}) => (
-          <ProductItem
-            item={item}
-            style={index === 0 ? styles.firstItem : undefined}
-            type="wishlist"
-          />
-        )}
-        renderHiddenItem={({item}) => (
-          <View style={styles.viewSwiper}>
-            <ButtonSwiper onPress={() => this.removeItem(item.id)} />
-          </View>
-        )}
-        leftOpenValue={70}
-        rightOpenValue={-70}
-        disableLeftSwipe={I18nManager.isRTL}
-        disableRightSwipe={!I18nManager.isRTL}
+        keyExtractor={item => item.key}
+        renderItem={({ item, index }) => {
+          return (
+            <ProductItem
+              item={item}
+              style={index === 0 ? styles.firstItem : undefined}
+              type="wishlist"
+            />
+          )
+        }}
       />
+      // <SwipeListView
+      //   useFlatList
+      //   keyExtractor={(item) => `${item.id}`}
+      //   data={data}
+      //   renderItem={({item, index}) => (
+      // <ProductItem
+      //   item={item}
+      //   style={index === 0 ? styles.firstItem : undefined}
+      //   type="wishlist"
+      // />
+      //   )}
+      //   renderHiddenItem={({item}) => (
+      //     <View style={styles.viewSwiper}>
+      //       <ButtonSwiper onPress={() => this.removeItem(item.id)} />
+      //     </View>
+      //   )}
+      //   leftOpenValue={70}
+      //   rightOpenValue={-70}
+      //   disableLeftSwipe={I18nManager.isRTL}
+      //   disableRightSwipe={!I18nManager.isRTL}
+      // />
     );
   };
 
   render() {
-    const {t, countWishlist, data, loading} = this.props;
+    const { t, countWishlist, data, loading } = this.props;
 
     const subtitle =
       countWishlist > 1
-        ? t('common:text_items', {count: countWishlist})
-        : t('common:text_item', {count: countWishlist});
+        ? t('common:text_items', { count: countWishlist })
+        : t('common:text_item', { count: countWishlist });
 
     return (
       <ThemedView style={styles.container}>
@@ -102,8 +116,8 @@ class WishListScreen extends React.Component {
             <ActivityIndicator size="small" />
           </View>
         ) : (
-          this.renderData(data)
-        )}
+            this.renderData(data)
+          )}
       </ThemedView>
     );
   }
@@ -124,6 +138,7 @@ const styles = StyleSheet.create({
   },
   firstItem: {
     borderTopWidth: 1,
+    
   },
 });
 
