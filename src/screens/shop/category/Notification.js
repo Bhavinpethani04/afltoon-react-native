@@ -52,6 +52,7 @@ const Notification = ({
       <TouchableOpacity onPress={goToSales}>
         <ImageBackground
           {...rest}
+          resizeMode='stretch'
           source={require('src/assets/images/bg_banner.png')}
           style={[styles.bgBanner, style && style]}>
           <Text
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   bgBanner: {
     borderRadius: borderRadius.large,
     width: '100%',
-    height: 80,
+    height: 200,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',

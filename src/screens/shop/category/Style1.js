@@ -35,7 +35,7 @@ const Style1 = ({category, goProducts}) => {
                   h4: true,
                 }}
                 leftAvatar={{
-                  rounded: true,
+                  rounded: false,
                   source:
                     item.image && item.image.src
                       ? {
@@ -43,7 +43,7 @@ const Style1 = ({category, goProducts}) => {
                           cache: 'reload',
                         }
                       : noImage,
-                  size: 60,
+                  size: 80,
                 }}
                 rightIcon={
                   <Badge
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
   badge: {
     minWidth: 18,
     height: 18,
-    borderRadius: borderRadius.base + 1,
+    backgroundColor:'transparent'
+    // borderRadius: borderRadius.base + 1,
   },
   textBadge: {
     lineHeight: 18,

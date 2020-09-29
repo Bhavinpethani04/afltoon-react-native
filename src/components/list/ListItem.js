@@ -20,7 +20,7 @@ const ANDROID_SECONDARY = 'rgba(0, 0, 0, 0.54)';
 const chevronDefaultProps = {
   type: 'feather',
   name: 'chevron-right',
-  size: 18,
+  size: 30,
   isRotateRTL: true,
 };
 
