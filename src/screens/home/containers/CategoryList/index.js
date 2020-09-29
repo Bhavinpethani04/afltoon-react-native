@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {connect} from 'react-redux';
-import {compose} from 'recompose';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
-import {Dimensions, StyleSheet} from 'react-native';
-import {withNavigation} from '@react-navigation/compat';
-import {withTranslation} from 'react-i18next';
-import {categorySelector} from 'src/modules/category/selectors';
+import { Dimensions, StyleSheet, ImageBackground, View, ScrollView } from 'react-native';
+import { withNavigation } from '@react-navigation/compat';
+import { withTranslation } from 'react-i18next';
+import { categorySelector } from 'src/modules/category/selectors';
 
 import Container from 'src/containers/Container';
 import Heading from 'src/containers/Heading';
@@ -14,18 +14,37 @@ import Heading from 'src/containers/Heading';
 import Gird from './Gird';
 import Row from './Row';
 
-import {homeTabs} from 'src/config/navigator';
-import {languageSelector} from 'src/modules/common/selectors';
-import {padding} from 'src/components/config/spacing';
-import {typeShowCategory} from 'src/config/category';
+import { homeTabs } from 'src/config/navigator';
+import { languageSelector } from 'src/modules/common/selectors';
+import { padding } from 'src/components/config/spacing';
+import { typeShowCategory } from 'src/config/category';
+
+import { ThemedView, Text, ListItem } from 'src/components';
+
+
+import { mainStack } from 'src/config/navigator';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const initHeader = {
   style: {},
 };
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class CategoryList extends Component {
+
+  goToProducts = (category) => {
+    const params = {
+      id: category.id,
+      name: unescape(category.name),
+    };
+    this.props.navigation.navigate(mainStack.products, params);
+  }
+
+
   render() {
     const {
       category,
@@ -95,7 +114,7 @@ class CategoryList extends Component {
           </Container>
         )}
         <Container disable={categoryDisable}>
-          <ComponentCategory
+          {/* <ComponentCategory
             data={dataShow}
             width={widthImage}
             height={heightImage}
@@ -104,7 +123,25 @@ class CategoryList extends Component {
             round={fields.round_image}
             border={fields.border}
             disableName={fields.disable_text}
-          />
+          /> */}
+
+          <ScrollView horizontal={true} style={{ width: '100%' }} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoryMainView} >
+            {dataShow.map((item, inx) => {
+              return (
+                <TouchableOpacity style={[styles.categoryCellMainView, { width: widthImage, marginLeft: inx != 0 ? 15 : 0 }]} onPress={() => this.goToProducts(item)} >
+                  <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.categoryCellImageBackground, { width: widthImage }]} source={{ uri: item.image.src }}  >
+                    <View style={styles.categoryViewShedowView}>
+                      <Text bold style={styles.categoryText} >{item.name}</Text>
+                    </View>
+                  </ImageBackground>
+                </TouchableOpacity>
+              )
+            })}
+          </ScrollView>
+
+
+
+
         </Container>
       </>
     );
@@ -115,6 +152,11 @@ const styles = StyleSheet.create({
   header: {
     paddingTop: 0,
   },
+  categoryMainView: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' },
+  categoryCellMainView: { height: hp(10), borderRadius: 10 },
+  categoryCellImageBackground: { height: hp(10), alignItems: 'center', justifyContent: 'center' },
+  categoryViewShedowView: { width: '100%', height: hp(10), borderRadius: 10, backgroundColor: 'rgba(0,0,0,0.7)', alignItems: 'center', justifyContent: 'center' },
+  categoryText: { color: '#fff' }
 });
 
 const mapStateToProps = (state) => ({

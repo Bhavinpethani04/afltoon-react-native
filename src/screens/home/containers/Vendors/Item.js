@@ -16,12 +16,12 @@ const Item = ({item, style, theme}) => {
             ? {uri: item.gravatar}
             : require('src/assets/images/pDefault.png')
         }
-        size={60}
+        size={100}
         rounded
         containerStyle={styles.image}
       />
 
-      <Text h5 medium style={styles.name}>
+      {/* <Text h5 medium style={styles.name}>
         {item.store_name}
       </Text>
       <View style={styles.viewRating}>
@@ -34,7 +34,7 @@ const Item = ({item, style, theme}) => {
           color={theme.colors.warning}
           size={13}
         />
-      </View>
+      </View> */}
     </ThemedView>
   );
 };

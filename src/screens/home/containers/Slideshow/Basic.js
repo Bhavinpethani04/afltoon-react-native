@@ -53,7 +53,9 @@ class SlideshowBasic extends Component {
     const heightView = (widthView * heightImage) / widthImage;
     const heightFooter =
       fields.indicator || images.find((i) => i.enable_button) ? 25 : 0;
-    const heightScroll = heightView + heightFooter;
+    // const heightScroll = heightView + heightFooter;
+    
+    const heightScroll = 150
 
     const autoplayDelay =
       fields.auto_play_delay && parseInt(fields.auto_play_delay, 10)
@@ -112,7 +114,7 @@ class SlideshowBasic extends Component {
                   </Text>
                 </View>
               </Image>
-              {item.enable_button && (
+              {/* {item.enable_button && (
                 <Avatar
                   icon={{
                     name: 'arrow-right',
@@ -128,7 +130,7 @@ class SlideshowBasic extends Component {
                   }}
                   onPress={() => clickGoPage(item.action)}
                 />
-              )}
+              )} */}
             </View>
           )}
           sliderWidth={widthView}
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   },
   viewPagination: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 15,
     left: padding.large,
     justifyContent: 'flex-start',
     marginRight: 50 + padding.large,
