@@ -62,12 +62,12 @@ const Tabbar = (props) => {
       {({ theme }) => (
         <SafeAreaView
           forceInset={{ bottom: 'always' }}
-          style={[styles.container, theme.TabNavigator.tabStyle, { borderTopLeftRadius: 25, borderTopRightRadius: 25, backgroundColor: '#fff' }]}>
+          style={[styles.container, theme.TabNavigator.tabStyle]}>
           {data.map((tab, index) =>
             tab.isShow ? (
               <TouchableOpacity
                 key={index}
-                style={[styles.item, { backgroundColor: visit === index ? '#EEEEEE' : 'transparent', borderTopLeftRadius: index === 0 ? 25 : 0, borderTopRightRadius: index === 4 ? 25 : 0 }]}
+                style={[styles.item, { backgroundColor: visit === index ? '#EEEEEE' : 'transparent'}]}
                 onPress={() => navigation.navigate(tab.router)}>
                 <IconTabbar
                   name={tab.iconName}
