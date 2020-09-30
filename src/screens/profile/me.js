@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { StyleSheet, ScrollView, View, Linking } from 'react-native';
+import { StyleSheet, ScrollView, View, Linking, ImageBackground } from 'react-native';
 import { Header, ThemedView, Text } from 'src/components';
 
 import HeaderMe from './containers/HeaderMe';
@@ -20,6 +20,9 @@ import {
 
 import { grey5 } from 'src/components/config/colors';
 import { margin } from 'src/components/config/spacing';
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 class MeScreen extends Component {
   icon = (name) => {
@@ -47,8 +50,10 @@ class MeScreen extends Component {
     } = this.props;
 
     return (
-      <ThemedView isFullView>
+      // <ThemedView isFullView>
+      <ImageBackground style={{ height: hp(100), width: wp(100) }} source={require('../../assets/images/appBackground.png')}>
         <Header
+          backgroundColor={'transperent'}
           centerComponent={<TextHeader title={t('common:text_me_screen')} />}
           rightComponent={<CartIcon />}
         />
@@ -92,7 +97,8 @@ class MeScreen extends Component {
             </View>
           </Container>
         </ScrollView>
-      </ThemedView>
+        {/* </ThemedView> */}
+      </ImageBackground>
     );
   }
 }
@@ -101,6 +107,8 @@ const styles = StyleSheet.create({
   viewContent: {
     marginTop: margin.large,
     marginBottom: margin.big,
+    width: '75%',
+    alignSelf: 'center'
   },
   viewSocial: {
     flexDirection: 'row',

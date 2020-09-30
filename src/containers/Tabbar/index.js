@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Text, SafeAreaView, ThemeConsumer } from 'src/components';
 import IconTabbar from './IconTabbar';
 
@@ -38,7 +38,7 @@ const Tabbar = (props) => {
       isShow: configs.get('toggleWishlist'),
     },
     {
-      iconName: 'shopping-bag',
+      iconName: 'shopping',
       name: t('common:text_cart'),
       nameData: 'cart',
       router: homeTabs.cart,
@@ -63,30 +63,51 @@ const Tabbar = (props) => {
         <SafeAreaView
           forceInset={{ bottom: 'always' }}
           style={[styles.container, theme.TabNavigator.tabStyle]}>
-          {data.map((tab, index) =>
-            tab.isShow ? (
-              <TouchableOpacity
-                key={index}
-                style={[styles.item, { backgroundColor: visit === index ? '#EEEEEE' : 'transparent'}]}
-                onPress={() => navigation.navigate(tab.router)}>
-                <IconTabbar
+          {data.map((tab, index) => {
+
+            let tabIcon = require('../../assets/images/tabBar/home.png')
+
+            if (tab.iconName == 'search') {
+              tabIcon = require('../../assets/images/tabBar/search.png')
+            }
+            else if (tab.iconName == 'heart') {
+              tabIcon = require('../../assets/images/tabBar/heart.png')
+            }
+            else if (tab.iconName == 'shopping') {
+              tabIcon = require('../../assets/images/tabBar/shopping.png')
+            }
+            else if (tab.iconName == 'user') {
+              tabIcon = require('../../assets/images/tabBar/user.png')
+            }
+
+            return (
+
+              tab.isShow ? (
+                <TouchableOpacity
+                  key={index}
+                  style={[styles.item, { backgroundColor: visit === index ? '#EEEEEE' : 'transparent' }]}
+                  onPress={() => navigation.navigate(tab.router)}>
+                  {/* <IconTabbar
                   name={tab.iconName}
                   color={visit === index ? theme.colors.primary : grey5}
                   nameData={tab.nameData}
                   {...tab.iconProps}
-                />
-                <Text
-                  medium
-                  style={[
-                    styles.text,
-                    {
-                      color: visit === index ? theme.colors.primary : grey5,
-                    },
-                  ]}>
-                  {tab.name}
-                </Text>
-              </TouchableOpacity>
-            ) : null,
+                /> */}
+                  <Image style={{ height: 15, width: 15, tintColor: visit === index ? theme.colors.primary : grey5, resizeMode: 'contain' }} source={tabIcon} ></Image>
+                  <Text
+                    medium
+                    style={[
+                      styles.text,
+                      {
+                        color: visit === index ? theme.colors.primary : grey5,
+                      },
+                    ]}>
+                    {tab.name}
+                  </Text>
+                </TouchableOpacity>
+              ) : null
+            )
+          },
           )}
         </SafeAreaView>
       )}
