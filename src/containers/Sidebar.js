@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, ImageBackground, View } from 'react-native';
 import { ThemedView, Text, ListItem } from 'src/components';
 import ItemCategoryMenu from './ItemCategoryMenu';
 
@@ -13,6 +13,8 @@ import { padding, margin } from 'src/components/config/spacing';
 import { homeTabs, mainStack } from 'src/config/navigator';
 import { excludeCategory } from '../utils/category';
 import { exclude_categories_sidebar } from '../config/category';
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 class Sidebar extends React.Component {
   handlePage = (router, params = {}) => {
@@ -77,42 +79,46 @@ class Sidebar extends React.Component {
     console.log('_data', _data)
 
     return (
-      <ThemedView isFullView>
-        <ScrollView>
-          <Text h3 medium style={[styles.title, styles.titleHead]}>
-            Settings
+      // <ThemedView isFullView>
+      <ImageBackground style={{ height: hp(100) }} source={require('../assets/images/appBackground.png')} >
+        <View style={{ width: '75%', alignSelf: 'center' }} >
+          <ScrollView>
+            <Text h3 medium style={[styles.title, styles.titleHead]}>
+              Settings
           </Text>
-          {_data.map((c) => (
-            c.name != "Sport" && c.name != "Decor" ?
-              <ItemCategoryMenu
-                key={c.id}
-                category={c}
-                isOpen={
-                  navigation.state && navigation.state.isDrawerOpen
-                    ? navigation.state.isDrawerOpen
-                    : false
-                }
-                goProducts={this.handlePage}
-              /> : null
-          ))}
-          <Text h3 medium style={styles.title}>
-            {t('common:text_help')}
-          </Text>
-          {dataHelpInfo.map((value) => (
-            <ListItem
-              key={value.id}
-              title={t(value.name)}
-              titleProps={{
-                medium: true,
-              }}
-              type="underline"
-              small
-              containerStyle={styles.item}
-              onPress={() => this.handlePage(value.router, value.params)}
-            />
-          ))}
-        </ScrollView>
-      </ThemedView>
+            {_data.map((c) => (
+              c.name != "Sport" && c.name != "Decor" ?
+                <ItemCategoryMenu
+                  key={c.id}
+                  category={c}
+                  isOpen={
+                    navigation.state && navigation.state.isDrawerOpen
+                      ? navigation.state.isDrawerOpen
+                      : false
+                  }
+                  goProducts={this.handlePage}
+                /> : null
+            ))}
+            <Text h3 medium style={styles.title}>
+              {t('common:text_help')}
+            </Text>
+            {dataHelpInfo.map((value) => (
+              <ListItem
+                key={value.id}
+                title={t(value.name)}
+                titleProps={{
+                  medium: true,
+                }}
+                type="underline"
+                small
+                containerStyle={styles.item}
+                onPress={() => this.handlePage(value.router, value.params)}
+              />
+            ))}
+          </ScrollView>
+        </View>
+      </ImageBackground>
+      // </ThemedView>
     );
   }
 }

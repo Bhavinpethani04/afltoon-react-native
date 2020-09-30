@@ -11,7 +11,7 @@ import {
   Switch,
   KeyboardAvoidingView,
   Platform,
-  TextInput, TouchableOpacity
+  TextInput, TouchableOpacity, ImageBackground
 } from 'react-native';
 import {
   Header,
@@ -208,10 +208,12 @@ class RegisterScreen extends React.Component {
     return (
       <ThemeConsumer>
         {({ theme }) => (
-          <ThemedView isFullView>
+          // <ThemedView isFullView>
+          <ImageBackground style={{ height: hp(100), width: wp(100) }} source={require('../../assets/images/appBackground.png')}>
             <Loading visible={pending} />
             <Header
-              leftComponent={<IconHeader />}
+              backgroundColor={'transperent'}
+              leftComponent={<IconHeader color={'#fff'} />}
             // centerComponent={<TextHeader title={t('common:text_register')} />}
             />
             <KeyboardAvoidingView behavior="height" style={styles.keyboard}>
@@ -224,8 +226,9 @@ class RegisterScreen extends React.Component {
                     />
                   ) : null}
 
-                  <Text style={styles.signUpLebel}>Sign Up</Text>
-                  {/* <Input
+                  <View style={{ width: '75%', alignSelf: 'center' }} >
+                    <Text style={styles.signUpLebel}>Sign Up</Text>
+                    {/* <Input
                     label={t('auth:text_input_first_name')}
                     value={first_name}
                     onChangeText={(value) =>
@@ -272,88 +275,89 @@ class RegisterScreen extends React.Component {
                   /> */}
 
 
-                  <Text style={styles.textInputLabel} >Name</Text>
-                  <TextInput
-                    placeholder={'Username'}
-                    value={first_name}
-                    onChangeText={(value) =>
-                      this.changeData({ first_name: value })
-                    }
-                    style={styles.textInputOuterStyle} >
-                  </TextInput>
-
-                  <Text style={styles.textInputLabel} >Email</Text>
-                  <TextInput
-                    placeholder={'Username'}
-                    value={last_name}
-                    onChangeText={(value) =>
-                      this.changeData({ last_name: value })
-                    }
-                    style={styles.textInputOuterStyle} >
-                  </TextInput>
-
-
-                  <Text style={styles.textInputLabel} >Password</Text>
-                  <View style={styles.textInputOuterStyle}>
+                    <Text style={styles.textInputLabel} >Name</Text>
                     <TextInput
-                      placeholder={'Password'}
-                      value={password}
-                      secureTextEntry={this.state.isPasswordShow}
-                      onChangeText={(value) => this.changeData({ password: value })}
-                      style={styles.passWordTextInput} >
-                    </TextInput>
-                    <TouchableOpacity onPress={() => this.setState({ isPasswordShow: !this.state.isPasswordShow })} >
-                      <Icon name={this.state.isPasswordShow ? 'eye' : 'eye-off'} size={20} ></Icon>
-                    </TouchableOpacity>
-                  </View>
-
-
-
-                  <View style={styles.viewSwitch}>
-                    <Switch
-                      value={subscribe}
-                      onValueChange={(value) =>
-                        this.changeData({ subscribe: value })
+                      placeholder={'Username'}
+                      value={first_name}
+                      onChangeText={(value) =>
+                        this.changeData({ first_name: value })
                       }
-                    />
-                    <Text style={styles.textSwitch} colorSecondary>
-                      I accept the terms and conditions
+                      style={styles.textInputOuterStyle} >
+                    </TextInput>
+
+                    <Text style={styles.textInputLabel} >Email</Text>
+                    <TextInput
+                      placeholder={'Username'}
+                      value={last_name}
+                      onChangeText={(value) =>
+                        this.changeData({ last_name: value })
+                      }
+                      style={styles.textInputOuterStyle} >
+                    </TextInput>
+
+
+                    <Text style={styles.textInputLabel} >Password</Text>
+                    <View style={styles.textInputOuterStyle}>
+                      <TextInput
+                        placeholder={'Password'}
+                        value={password}
+                        secureTextEntry={this.state.isPasswordShow}
+                        onChangeText={(value) => this.changeData({ password: value })}
+                        style={styles.passWordTextInput} >
+                      </TextInput>
+                      <TouchableOpacity onPress={() => this.setState({ isPasswordShow: !this.state.isPasswordShow })} >
+                        <Icon name={this.state.isPasswordShow ? 'eye' : 'eye-off'} size={20} ></Icon>
+                      </TouchableOpacity>
+                    </View>
+
+
+
+                    <View style={styles.viewSwitch}>
+                      <Switch
+                        value={subscribe}
+                        onValueChange={(value) =>
+                          this.changeData({ subscribe: value })
+                        }
+                      />
+                      <Text style={styles.textSwitch} colorSecondary>
+                        I accept the terms and conditions
                     </Text>
-                  </View>
-                  <Button
-                    title={t('auth:text_register')}
-                    buttonStyle={{ borderRadius: 5 }}
-                    onPress={this.handleRegister}
-                    loading={loading || pending}
-                  />
-
-                  <View style={styles.viewSocial}>
-
-                    <SocialIcon
-                      raised={false}
-                      type="twitter"
-                      style={styles.socialIconStyle}
-                      iconSize={15}
-                      onPress={() => this.handleLinkUrl(configs.get('twitter'))}
+                    </View>
+                    <Button
+                      title={t('auth:text_register')}
+                      buttonStyle={{ borderRadius: 5 }}
+                      onPress={this.handleRegister}
+                      loading={loading || pending}
                     />
 
+                    <View style={styles.viewSocial}>
 
-                    <SocialIcon
-                      raised={false}
-                      type="google-plus-square"
-                      style={styles.socialIconStyle}
-                      iconSize={15}
-                      onPress={() => this.handleLinkUrl(configs.get('facebook'))}
-                    />
+                      <SocialIcon
+                        raised={false}
+                        type="twitter"
+                        style={styles.socialIconStyle}
+                        iconSize={15}
+                        onPress={() => this.handleLinkUrl(configs.get('twitter'))}
+                      />
 
-                    <SocialIcon
-                      raised={false}
-                      type="linkedin"
-                      style={styles.socialIconStyle}
-                      iconSize={15}
-                      onPress={() => this.handleLinkUrl(configs.get('instagram'))}
-                    />
 
+                      <SocialIcon
+                        raised={false}
+                        type="google-plus-square"
+                        style={styles.socialIconStyle}
+                        iconSize={15}
+                        onPress={() => this.handleLinkUrl(configs.get('facebook'))}
+                      />
+
+                      <SocialIcon
+                        raised={false}
+                        type="linkedin"
+                        style={styles.socialIconStyle}
+                        iconSize={15}
+                        onPress={() => this.handleLinkUrl(configs.get('instagram'))}
+                      />
+
+                    </View>
                   </View>
                   {/* <SocialMethods style={styles.viewAccount} /> */}
 
@@ -384,7 +388,9 @@ class RegisterScreen extends React.Component {
                 </Container>
               </ScrollView>
             </KeyboardAvoidingView>
-          </ThemedView>
+
+            {/* </ThemedView> */}
+          </ImageBackground>
         )}
       </ThemeConsumer>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { StyleSheet, ScrollView, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, View, KeyboardAvoidingView, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 import {
   Header,
   Divider,
@@ -62,13 +62,16 @@ class LoginScreen extends React.Component {
     return (
       <ThemeConsumer>
         {({ theme }) => (
-          <ThemedView isFullView>
+          // <ThemedView isFullView>
+          <ImageBackground style={{ height: hp(100), width: wp(100) }} source={require('../../assets/images/appBackground.png')}>
             <Header
+              backgroundColor={'transperent'}
               leftComponent={
                 !requiredLogin && (
                   <IconHeader
                     name="angle-left"
                     type={'font-awesome'}
+                    color={'#fff'}
                     size={26}
                     onPress={() => navigation.navigate(rootSwitch.main)}
                   />
@@ -77,7 +80,7 @@ class LoginScreen extends React.Component {
             // centerComponent={<TextHeader title={t('common:text_signin')} />}
             />
             <KeyboardAvoidingView behavior="height" style={styles.keyboard}>
-              <ScrollView>
+              <ScrollView >
                 <Container>
                   {message ? (
                     <TextHtml
@@ -86,49 +89,51 @@ class LoginScreen extends React.Component {
                     />
                   ) : null}
 
-                  <Text style={styles.loginLebel} >Login</Text>
+                  <View style={{ width: '75%', alignSelf: 'center' }} >
+                    <Text style={styles.loginLebel} >Login</Text>
 
-                  <Text style={styles.textInputLabel} >Email</Text>
-                  <TextInput
-                    placeholder={'Username'}
-                    value={username}
-                    onChangeText={(value) => this.setState({ username: value })}
-                    style={styles.textInputOuterStyle} >
-                  </TextInput>
-
-                  <Text style={styles.textInputLabel} >Password</Text>
-                  <View style={styles.textInputOuterStyle}>
+                    <Text style={[styles.textInputLabel, { marginTop: hp(10) }]} >Email</Text>
                     <TextInput
-                      placeholder={'Password'}
-                      value={password}
-                      secureTextEntry={this.state.isPasswordShow}
-                      onChangeText={(value) => this.setState({ password: value })}
-                      style={styles.passWordTextInput} >
+                      placeholder={'Username'}
+                      value={username}
+                      onChangeText={(value) => this.setState({ username: value })}
+                      style={styles.textInputOuterStyle} >
                     </TextInput>
-                    <TouchableOpacity onPress={() => this.setState({ isPasswordShow: !this.state.isPasswordShow })} >
-                      <Icon name={this.state.isPasswordShow ? 'eye' : 'eye-off'} size={20} ></Icon>
+
+                    <Text style={styles.textInputLabel} >Password</Text>
+                    <View style={styles.textInputOuterStyle}>
+                      <TextInput
+                        placeholder={'Password'}
+                        value={password}
+                        secureTextEntry={this.state.isPasswordShow}
+                        onChangeText={(value) => this.setState({ password: value })}
+                        style={styles.passWordTextInput} >
+                      </TextInput>
+                      <TouchableOpacity onPress={() => this.setState({ isPasswordShow: !this.state.isPasswordShow })} >
+                        <Icon name={this.state.isPasswordShow ? 'eye' : 'eye-off'} size={20} ></Icon>
+                      </TouchableOpacity>
+                    </View>
+
+                    <Text
+                      onPress={() => navigation.navigate(authStack.forgot)}
+                      style={styles.forgotPasswordText}
+                      medium>
+                      {t('auth:text_forgot')}
+                    </Text>
+
+
+                    <Button
+                      title={'Log In'}
+                      loading={pending}
+                      onPress={this.handleLogin}
+                      buttonStyle={{ borderRadius: 5 }}
+                      containerStyle={styles.margin}
+                    />
+
+                    <TouchableOpacity onPress={() => navigation.navigate(authStack.register)} >
+                      <Text style={styles.signUpLineText} >Don't have an account ? Sign Up</Text>
                     </TouchableOpacity>
                   </View>
-
-                  <Text
-                    onPress={() => navigation.navigate(authStack.forgot)}
-                    style={styles.forgotPasswordText}
-                    medium>
-                    {t('auth:text_forgot')}
-                  </Text>
-
-
-                  <Button
-                    title={'Log In'}
-                    loading={pending}
-                    onPress={this.handleLogin}
-                    buttonStyle={{ borderRadius: 5 }}
-                    containerStyle={styles.margin}
-                  />
-
-                  <TouchableOpacity onPress={() => navigation.navigate(authStack.register)} >
-                    <Text style={styles.signUpLineText} >Don't have an account ? Sign Up</Text>
-                  </TouchableOpacity>
 
                   {/* <View style={[styles.viewOr, styles.margin]}>
                     <Divider style={styles.divOr} />
@@ -152,7 +157,9 @@ class LoginScreen extends React.Component {
                 onPress={() => navigation.navigate(authStack.register)}
               />
             </Container> */}
-          </ThemedView>
+          </ImageBackground>
+          // </ThemedView>
+
         )}
       </ThemeConsumer>
     );
@@ -187,7 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: margin.big,
   },
 
-  loginLebel: { fontSize: hp(5), marginVertical: hp(5) },
+  loginLebel: { fontSize: hp(5) },
 
   textInputLabel: {
     marginTop: 10,
