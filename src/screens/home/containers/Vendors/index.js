@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {connect} from 'react-redux';
-import {compose} from 'recompose';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import compact from 'lodash/compact';
 
 import {
@@ -9,20 +9,22 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {withNavigation} from '@react-navigation/compat';
-import {withTranslation} from 'react-i18next';
+import { withNavigation } from '@react-navigation/compat';
+import { withTranslation } from 'react-i18next';
 
 import Container from 'src/containers/Container';
 import Heading from 'src/containers/Heading';
 import Item from './Item';
 import ItemLoading from './ItemLoading';
 
-import {mainStack} from 'src/config/navigator';
-import {languageSelector} from 'src/modules/common/selectors';
-import {getVendors} from 'src/modules/vendor/service';
-import {fetchVendorDetailSuccess} from 'src/modules/vendor/actions';
+import { mainStack } from 'src/config/navigator';
+import { languageSelector } from 'src/modules/common/selectors';
+import { getVendors } from 'src/modules/vendor/service';
+import { fetchVendorDetailSuccess } from 'src/modules/vendor/actions';
 
-import {padding} from 'src/components/config/spacing';
+import { padding } from 'src/components/config/spacing';
+
+import { ThemedView, Text, ListItem } from 'src/components';
 
 const initHeader = {
   style: {},
@@ -31,7 +33,7 @@ const initHeader = {
 class Vendors extends Component {
   constructor(props) {
     super(props);
-    const {fields} = props;
+    const { fields } = props;
     this.state = {
       data: [],
       loading: false,
@@ -50,7 +52,7 @@ class Vendors extends Component {
     }
   }
   fetchData = () => {
-    const {fields} = this.props;
+    const { fields } = this.props;
     this.setState({
       loading: true,
     });
@@ -58,7 +60,7 @@ class Vendors extends Component {
       fields && fields.limit && parseInt(fields.limit, 10)
         ? parseInt(fields.limit, 10)
         : 4;
-    const query = {per_page: limit};
+    const query = { per_page: limit };
     // eslint-disable-next-line no-undef
     this.abortController = new AbortController();
     getVendors(query, {
@@ -78,24 +80,24 @@ class Vendors extends Component {
   };
 
   clickDetailVendor = (data) => {
-    const {dispatch, navigation} = this.props;
+    const { dispatch, navigation } = this.props;
     dispatch(fetchVendorDetailSuccess(data));
     navigation.navigate(mainStack.store_detail);
   };
   renderLoading = (padEnd) => {
-    const {limit} = this.state;
+    const { limit } = this.state;
     const listData = Array.from(Array(limit)).map((arg, index) => index);
     return listData.map(value => <ItemLoading
       key={value}
       style={[
         styles.viewItem,
-        value === listData.length - 1 && {marginRight: padEnd},
+        value === listData.length - 1 && { marginRight: padEnd },
       ]}
     />)
   };
   render() {
-    const {navigation, fields, language, t} = this.props;
-    const {data, loading} = this.state;
+    const { navigation, fields, language, t } = this.props;
+    const { data, loading } = this.state;
     if (
       !fields ||
       typeof fields !== 'object' ||
@@ -109,15 +111,18 @@ class Vendors extends Component {
     const contentDisable = !fields.boxed ? 'all' : 'right';
     const padEnd = fields.boxed ? padding.large : 0;
 
+    console.log('Featured Daata', data)
+
     return (
       <>
         {fields.disable_heading && (
           <Container disable={headerDisable}>
             <Heading
               title={
-                heading.text && heading.text[language]
-                  ? heading.text[language]
-                  : t('common:text_category')
+                // heading.text && heading.text[language]
+                //   ? heading.text[language]
+                //   : t('common:text_category')
+                'Featured'
               }
               style={heading.style && heading.style}
               containerStyle={styles.header}
@@ -133,10 +138,12 @@ class Vendors extends Component {
                 key={item.id}
                 style={[
                   styles.viewItem,
-                  index === data.length - 1 && {marginRight: padEnd},
+                  index === data.length - 1 && { marginRight: padEnd },
                 ]}
                 onPress={() => this.clickDetailVendor(item)}>
                 <Item item={item} style={styles.item} />
+                <Text style={styles.cellTitle1} >QR 55.00</Text>
+                <Text style={styles.cellTitle2} >Woman T-Shirt</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -156,6 +163,14 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
   },
+  cellTitle1: {
+    marginTop: 10,
+    color: '#000'
+  },
+  cellTitle2: {
+    marginTop: 5,
+    color: 'gray'
+  }
 });
 
 const mapStateToProps = (state) => ({
