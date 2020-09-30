@@ -1,22 +1,22 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
-import {StyleSheet, ScrollView} from 'react-native';
-import {ThemedView, Text, ListItem} from 'src/components';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { StyleSheet, ScrollView } from 'react-native';
+import { ThemedView, Text, ListItem } from 'src/components';
 import ItemCategoryMenu from './ItemCategoryMenu';
 
-import {categorySelector} from 'src/modules/category/selectors';
-import {configsSelector, languageSelector} from 'src/modules/common/selectors';
-import {padding, margin} from 'src/components/config/spacing';
+import { categorySelector } from 'src/modules/category/selectors';
+import { configsSelector, languageSelector } from 'src/modules/common/selectors';
+import { padding, margin } from 'src/components/config/spacing';
 
-import {homeTabs, mainStack} from 'src/config/navigator';
-import {excludeCategory} from '../utils/category';
-import {exclude_categories_sidebar} from '../config/category';
+import { homeTabs, mainStack } from 'src/config/navigator';
+import { excludeCategory } from '../utils/category';
+import { exclude_categories_sidebar } from '../config/category';
 
 class Sidebar extends React.Component {
   handlePage = (router, params = {}) => {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     if (!navigation) {
       return null;
     }
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const {t, category, configs, language, navigation} = this.props;
+    const { t, category, configs, language, navigation } = this.props;
     const dataHelpInfo = [
       {
         id: '1',
@@ -66,35 +66,34 @@ class Sidebar extends React.Component {
           type: 'page',
         },
       },
-      {
-        id: '6',
-        name: 'common:text_contact',
-        router: mainStack.contact,
-      },
     ];
 
-    const {data} = category;
+    const { data } = category;
 
     // Filter include category
     const _data = excludeCategory(data, exclude_categories_sidebar);
+
+
+    console.log('_data', _data)
 
     return (
       <ThemedView isFullView>
         <ScrollView>
           <Text h3 medium style={[styles.title, styles.titleHead]}>
-            {t('common:text_category')}
+            Settings
           </Text>
           {_data.map((c) => (
-            <ItemCategoryMenu
-              key={c.id}
-              category={c}
-              isOpen={
-                navigation.state && navigation.state.isDrawerOpen
-                  ? navigation.state.isDrawerOpen
-                  : false
-              }
-              goProducts={this.handlePage}
-            />
+            c.name != "Sport" && c.name != "Decor" ?
+              <ItemCategoryMenu
+                key={c.id}
+                category={c}
+                isOpen={
+                  navigation.state && navigation.state.isDrawerOpen
+                    ? navigation.state.isDrawerOpen
+                    : false
+                }
+                goProducts={this.handlePage}
+              /> : null
           ))}
           <Text h3 medium style={styles.title}>
             {t('common:text_help')}

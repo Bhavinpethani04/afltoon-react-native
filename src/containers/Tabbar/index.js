@@ -1,22 +1,22 @@
 import React from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {connect} from 'react-redux';
-import {TouchableOpacity, StyleSheet} from 'react-native';
-import {Text, SafeAreaView, ThemeConsumer} from 'src/components';
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, SafeAreaView, ThemeConsumer } from 'src/components';
 import IconTabbar from './IconTabbar';
 
-import {homeTabs} from 'src/config/navigator';
+import { homeTabs } from 'src/config/navigator';
 
-import {configsSelector} from 'src/modules/common/selectors';
+import { configsSelector } from 'src/modules/common/selectors';
 
-import {grey5} from 'src/components/config/colors';
-import {sizes} from 'src/components/config/fonts';
-import {padding} from 'src/components/config/spacing';
+import { grey5 } from 'src/components/config/colors';
+import { sizes } from 'src/components/config/fonts';
+import { padding } from 'src/components/config/spacing';
 
 const Tabbar = (props) => {
-  const {t} = useTranslation();
-  const {configs, navigation, state} = props;
+  const { t } = useTranslation();
+  const { configs, navigation, state } = props;
   const data = [
     {
       iconName: 'home',
@@ -59,15 +59,15 @@ const Tabbar = (props) => {
 
   return (
     <ThemeConsumer>
-      {({theme}) => (
+      {({ theme }) => (
         <SafeAreaView
-          forceInset={{bottom: 'always'}}
+          forceInset={{ bottom: 'always' }}
           style={[styles.container, theme.TabNavigator.tabStyle]}>
           {data.map((tab, index) =>
             tab.isShow ? (
               <TouchableOpacity
                 key={index}
-                style={styles.item}
+                style={[styles.item, { backgroundColor: visit === index ? '#EEEEEE' : 'transparent'}]}
                 onPress={() => navigation.navigate(tab.router)}>
                 <IconTabbar
                   name={tab.iconName}

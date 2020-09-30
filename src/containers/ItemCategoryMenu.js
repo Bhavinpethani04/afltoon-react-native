@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {ListItem, Icon} from 'src/components';
-import {padding} from 'src/components/config/spacing';
+import { StyleSheet, View } from 'react-native';
+import { ListItem, Icon } from 'src/components';
+import { padding } from 'src/components/config/spacing';
 import unescape from 'lodash/unescape';
 
-import {mainStack} from 'src/config/navigator';
-import {excludeCategory} from '../utils/category';
-import {exclude_categories_sidebar} from '../config/category';
+import { mainStack } from 'src/config/navigator';
+import { excludeCategory } from '../utils/category';
+import { exclude_categories_sidebar } from '../config/category';
 
 class ItemCategoryMenu extends React.Component {
   constructor(props) {
@@ -35,13 +35,13 @@ class ItemCategoryMenu extends React.Component {
   };
 
   render() {
-    const {category} = this.props;
-    const {isShowSub} = this.state;
+    const { category } = this.props;
+    const { isShowSub } = this.state;
     if (!category) {
       return null;
     }
 
-    const {categories} = category;
+    const { categories } = category;
     const data = excludeCategory(categories, exclude_categories_sidebar);
 
     return (
@@ -55,7 +55,8 @@ class ItemCategoryMenu extends React.Component {
           rightElement={
             data.length > 0 && (
               <Icon
-                name={isShowSub ? 'minus' : 'plus'}
+                name={isShowSub ? 'caret-up' : 'caret-down'}
+                type={'font-awesome'}
                 size={14}
                 iconStyle={styles.icon}
                 activeOpacity={1}
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
 ItemCategoryMenu.defaultProps = {
   subCategories: [],
   isOpen: false,
-  goProducts: () => {},
+  goProducts: () => { },
 };
 
 export default ItemCategoryMenu;
