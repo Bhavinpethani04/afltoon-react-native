@@ -13,7 +13,7 @@ const FooterProduct = ({isAddToCart, loading, onPressAddCart, onPressViewCart}) 
     <Container style={{marginBottom: margin.big, marginTop: margin.large}}>
       <Row>
         <Col>
-          <Button title={t('common:text_add_cart')} onPress={onPressAddCart} loading={loading}/>
+          <Button buttonStyle={{borderRadius:10,}} title={t('common:text_add_cart')} onPress={onPressAddCart} loading={loading}/>
         </Col>
         {isAddToCart && (
           <Col>
