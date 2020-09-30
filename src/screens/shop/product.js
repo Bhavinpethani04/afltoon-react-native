@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {compose} from 'recompose';
-import {fromJS, List} from 'immutable';
-import {connect} from 'react-redux';
+import { compose } from 'recompose';
+import { fromJS, List } from 'immutable';
+import { connect } from 'react-redux';
 import merge from 'lodash/merge';
 import unescape from 'lodash/unescape';
-import {withTranslation} from 'react-i18next';
-import {showMessage} from 'react-native-flash-message';
-import {StyleSheet, View, Dimensions, TouchableOpacity} from 'react-native';
-import {Text, ListItem, ThemedView, ThemeConsumer} from 'src/components';
+import { withTranslation } from 'react-i18next';
+import { showMessage } from 'react-native-flash-message';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { Text, ListItem, ThemedView, ThemeConsumer } from 'src/components';
 import Price from 'src/containers/Price';
 import Container from 'src/containers/Container';
 import Rating from 'src/containers/Rating';
@@ -26,7 +26,7 @@ import ProductImages from './product/ProductImages';
 import ProductStock from './product/ProductStock';
 import FooterProduct from './product/FooterProduct';
 
-import {getVariations} from 'src/modules/product/service';
+import { getVariations } from 'src/modules/product/service';
 import {
   attributeSelector,
   dataRatingSelector,
@@ -38,30 +38,30 @@ import {
   configsSelector,
 } from 'src/modules/common/selectors';
 
-import {prepareProductItem} from 'src/utils/product';
-import {changeColor, changeSize} from 'src/utils/text-html';
+import { prepareProductItem } from 'src/utils/product';
+import { changeColor, changeSize } from 'src/utils/text-html';
 
-import {getSingleData, defaultPropsData} from 'src/hoc/single-data';
-import {withAddToCart} from 'src/hoc/hoc-add-to-card';
-import {withLoading} from 'src/hoc/loading';
+import { getSingleData, defaultPropsData } from 'src/hoc/single-data';
+import { withAddToCart } from 'src/hoc/hoc-add-to-card';
+import { withLoading } from 'src/hoc/loading';
 
-import {mainStack, homeTabs} from 'src/config/navigator';
-import {margin} from 'src/components/config/spacing';
+import { mainStack, homeTabs } from 'src/config/navigator';
+import { margin } from 'src/components/config/spacing';
 import * as productType from 'src/config/product';
 
-import {handleError} from 'src/utils/error';
-import {fetchProductAttributes, fetchRating} from 'src/modules/product/actions';
-import {fetchVendorDetail} from 'src/modules/vendor/actions';
-import {detailVendorSelector} from 'src/modules/vendor/selectors';
+import { handleError } from 'src/utils/error';
+import { fetchProductAttributes, fetchRating } from 'src/modules/product/actions';
+import { fetchVendorDetail } from 'src/modules/vendor/actions';
+import { detailVendorSelector } from 'src/modules/vendor/selectors';
 
-const {height} = Dimensions.get('window');
-const HEADER_MAX_HEIGHT = height * 0.6;
+const { height } = Dimensions.get('window');
+const HEADER_MAX_HEIGHT = height * 0.4;
 
 class Product extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const {route, data, currency, defaultCurrency} = props;
+    const { route, data, currency, defaultCurrency } = props;
     const product = route?.params?.product ?? {};
     // no need get days in prepareProductItem
     const dataPrepare = prepareProductItem(
@@ -81,8 +81,8 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    const {dispatch, attribute, lang} = this.props;
-    const {product} = this.state;
+    const { dispatch, attribute, lang } = this.props;
+    const { product } = this.state;
 
     const vendor_id = product.getIn(['store', 'id']);
     dispatch(fetchRating(product.get('id')));
@@ -132,8 +132,8 @@ class Product extends Component {
   }
 
   addToCart = () => {
-    const {addCart, state: {variation}, t} = this.props;
-    const {product} = this.state;
+    const { addCart, state: { variation }, t } = this.props;
+    const { product } = this.state;
     if (product.get('type') === productType.VARIABLE) {
       const attributeProduct = product
         .get('attributes')
@@ -144,16 +144,16 @@ class Product extends Component {
           type: 'danger',
         });
       } else {
-        addCart(product.get('id'), () => this.setState({isAddToCart: true}));
+        addCart(product.get('id'), () => this.setState({ isAddToCart: true }));
       }
     } else {
-      addCart(product.get('id'), () => this.setState({isAddToCart: true}));
+      addCart(product.get('id'), () => this.setState({ isAddToCart: true }));
     }
   };
 
   images = () => {
-    const {state: {variation_id}} = this.props;
-    const {product, variations, images} = this.state;
+    const { state: { variation_id } } = this.props;
+    const { product, variations, images } = this.state;
     const variation = variations.find(v => v.get('id') === variation_id);
 
     if (
@@ -172,8 +172,8 @@ class Product extends Component {
   };
 
   showPrice = () => {
-    const {currency, defaultCurrency, state: {variation_id}} = this.props;
-    const {product, variations} = this.state;
+    const { currency, defaultCurrency, state: { variation_id } } = this.props;
+    const { product, variations } = this.state;
     const variation = variations.find(v => v.get('id') === variation_id);
     let price_format = product.get('price_format').toJS();
     let type = product.get('type');
@@ -192,19 +192,20 @@ class Product extends Component {
           type={type}
           h4
           isPercentSale
-          // style={styles.viewPrice}
+        // style={styles.viewPrice}
         />
-        <ProductStock
+        {/* <ProductStock
           product={p}
-          // style={p.get('type') !== productType.SIMPLE && styles.viewStock}
-        />
+        // style={p.get('type') !== productType.SIMPLE && styles.viewStock}
+        /> */}
+        <Text style={{ marginLeft:10, textDecorationLine: 'line-through', }}>$120</Text>
       </View>
     );
   };
 
   showInfoType = () => {
-    const {attribute, state: {variation}, selectVariation, updateMetaVariation} = this.props;
-    const {product, variations, loadingVariation} = this.state;
+    const { attribute, state: { variation }, selectVariation, updateMetaVariation } = this.props;
+    const { product, variations, loadingVariation } = this.state;
     if (product.get('type') === productType.EXTERNAL) {
       return <ProductExternal product={product} />;
     }
@@ -230,15 +231,15 @@ class Product extends Component {
   render() {
     const {
       t,
-      dataRating: {rating},
+      dataRating: { rating },
       navigation,
       configs,
       vendorDetail,
       loading,
-      state: {variation_id},
+      state: { variation_id },
     } = this.props;
 
-    const {product, isAddToCart, variations} = this.state;
+    const { product, isAddToCart, variations } = this.state;
 
     if (!product.get('id')) {
       return (
@@ -290,9 +291,9 @@ class Product extends Component {
         }
         heightViewImage={HEADER_MAX_HEIGHT}>
         <Container style={styles.container}>
-          <View style={styles.viewCategoryRating}>
+          {/*<View style={styles.viewCategoryRating}>
             <CategoryName product={product} style={styles.textCategory} />
-            {configs.get('toggleReviewProduct') ? (
+             {configs.get('toggleReviewProduct') ? (
               <TouchableOpacity
                 style={styles.viewRating}
                 onPress={() =>
@@ -307,35 +308,78 @@ class Product extends Component {
                   ({product.get('rating_count')})
                 </Text>
               </TouchableOpacity>
-            ) : null}
+            ) : null} 
+          </View>*/}
+          <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+            <Text h2 medium style={styles.textName}>
+              {unescape(product.get('name'))}
+            </Text>
+            <TouchableOpacity>
+              <Image style={{ width: 16, height: 24, resizeMode: 'contain' }} source={require('../../assets/images/ic_turned_in_not_24px.png')} />
+            </TouchableOpacity>
           </View>
-          <Text h2 medium style={styles.textName}>
-            {unescape(product.get('name'))}
-          </Text>
+
           {this.showPrice()}
-          {product.get('sku') ? (
+          {/* {product.get('sku') ? (
             <Text h6 medium style={styles.textName}>
               sku: {product.get('sku')}
             </Text>
-          ) : null}
-          {configs.get('toggleShortDescriptionProduct') &&
-          product.get('short_description') ? (
-            <View style={styles.viewDescription}>
-              <ThemeConsumer>
-                {({theme}) => (
-                  <TextHtml
-                    value={product.get('short_description')}
-                    style={merge(
-                      changeSize('h6'),
-                      changeColor(theme.Text.third.color),
-                    )}
-                  />
-                )}
-              </ThemeConsumer>
+          ) : null} */}
+          <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', flexDirection: 'row' }}>
+            <View style={{ width: '20%', height: '70%', backgroundColor: 'black', borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
+              <Text style={{ color: 'white', fontSize: 20, }}>4.5</Text>
             </View>
-          ) : null}
+            <Text style={{ fontSize: 20, marginLeft: '5%' }}>Very Good</Text>
+            <Text style={{ fontSize: 17, marginLeft: '15%' }}>49 Reviews</Text>
+
+          </View>
+
+          <Text style={{ fontSize: 15, }}>Description</Text>
+
+          {configs.get('toggleShortDescriptionProduct') &&
+            product.get('short_description') ? (
+              <View style={styles.viewDescription}>
+                <ThemeConsumer>
+                  {({ theme }) => (
+                    <TextHtml
+                      value={product.get('short_description')}
+                      style={merge(
+                        changeSize('h6'),
+                        changeColor(theme.Text.third.color),
+                      )}
+                    />
+                  )}
+                </ThemeConsumer>
+              </View>
+            ) : null}
+          <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+            <TouchableOpacity>
+              <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', }}>Select Size</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={{ fontSize: 20, marginLeft: '5%' }}>Select Color</Text>
+            </TouchableOpacity>
+
+          </View>
+
+          <View style={{ width: '100%', height: 60, marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+            {
+              ["S", "M", "L"].map((item, index) => {
+                return (
+                  <TouchableOpacity style={{ height: 50, width: 50, backgroundColor:index==1 ? 'black' : 'rgba(241,241,241,1)', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginLeft:10 }}>
+                    <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', color:index==1?'white':'black' }}>{item}</Text>
+                  </TouchableOpacity>
+                )
+              })
+            }
+              <Text style={{ fontSize: 20, marginLeft: '5%' }}>XXL</Text>
+
+
+
+          </View>
+
           {this.showInfoType()}
-          <ListItem
+          {/* <ListItem
             title={t('catalog:text_description')}
             onPress={() =>
               this.props.navigation.navigate(mainStack.product_description, {
@@ -345,9 +389,9 @@ class Product extends Component {
             small
             chevron
             type="underline"
-          />
+          /> */}
 
-          {product.get('attributes') && product.get('attributes').size ? (
+          {/* {product.get('attributes') && product.get('attributes').size ? (
             <ListItem
               title={t('catalog:text_information')}
               onPress={() =>
@@ -359,9 +403,9 @@ class Product extends Component {
               chevron
               type="underline"
             />
-          ) : null}
+          ) : null} */}
 
-          {configs.get('toggleReviewProduct') ? (
+          {/* {configs.get('toggleReviewProduct') ? (
             <ListItem
               title={t('catalog:text_reviews')}
               onPress={() =>
@@ -375,7 +419,7 @@ class Product extends Component {
               chevron
               type="underline"
             />
-          ) : null}
+          ) : null} */}
           {vendorDetail && vendorDetail.size > 0 ? (
             <VendorHeaderDetail
               store={vendorDetail.toJS()}
@@ -384,11 +428,11 @@ class Product extends Component {
             />
           ) : null}
         </Container>
-        {related_ids.length ? (
+        {/* {related_ids.length ? (
           <View style={styles.viewRelated}>
             <RelatedProducts data={related_ids.join(',')} />
           </View>
-        ) : null}
+        ) : null} */}
       </ScrollProductDetail>
     );
   }
@@ -422,7 +466,6 @@ const styles = StyleSheet.create({
   },
   viewPrice: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: margin.large,
   },

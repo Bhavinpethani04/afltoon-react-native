@@ -136,20 +136,20 @@ class ProductImages extends Component {
             activeVisit={indexCurrency}
             count={images.size}
           />
-          <Icon
+          {/* <Icon
             name="upload"
             color={black}
             size={19}
             onPress={this.shareProduct}
             underlayColor="transparent"
-          />
+          /> */}
           {/*<Icon name="heart" color={black} size={19} />*/}
-          <WishListIcon
+          {/* <WishListIcon
             product_id={product_id}
             color={black}
             size={19}
             containerStyle={styles.iconWishlist}
-          />
+          /> */}
         </View>
         <Modal visible={visible} transparent={true}>
           <ImageViewer
