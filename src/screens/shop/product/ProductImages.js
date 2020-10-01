@@ -63,7 +63,7 @@ class ProductImages extends Component {
         },
         {
           // // Android only:
-          dialogTitle: 'Oreo product',
+          dialogTitle: 'Alftoon product',
           // // iOS only:
           // excludedActivityTypes: [
           //   'com.apple.UIKit.activity.PostToTwitter'

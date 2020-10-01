@@ -80,7 +80,7 @@ class Sidebar extends React.Component {
 
     return (
       // <ThemedView isFullView>
-      <ImageBackground style={{ height: hp(100) }} source={require('../assets/images/appBackground.png')} >
+      <ImageBackground style={{ height: hp(100), width: '100%' }} resizeMode={'stretch'} source={require('../assets/images/appBackground.png')} >
         <View style={{ width: '75%', alignSelf: 'center' }} >
           <ScrollView>
             <Text h3 medium style={[styles.title, styles.titleHead]}>

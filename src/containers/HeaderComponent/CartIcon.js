@@ -1,17 +1,17 @@
 // @flow
 import React from 'react';
 
-import {StyleSheet, TouchableOpacity, Animated} from 'react-native';
+import { StyleSheet, TouchableOpacity, Animated, Image } from 'react-native';
 
-import {connect} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
-import {ScreenProps} from 'react-native-screens';
-import {Badge, Icon} from 'src/components';
+import { connect } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { ScreenProps } from 'react-native-screens';
+import { Badge, Icon } from 'src/components';
 
-import {homeTabs} from 'src/config/navigator';
+import { homeTabs } from 'src/config/navigator';
 
-import {countItemSelector} from 'src/modules/cart/selectors';
-import {configsSelector} from 'src/modules/common/selectors';
+import { countItemSelector } from 'src/modules/cart/selectors';
+import { configsSelector } from 'src/modules/common/selectors';
 
 type Props = {
   value: number,
@@ -40,7 +40,7 @@ class CartIcon extends React.Component<Props> {
   }
 
   animated = () => {
-    const {scale} = this.state;
+    const { scale } = this.state;
     const toValue = scale._value === 1 ? 1.5 : 1;
     Animated.timing(scale, {
       toValue: toValue,
@@ -53,7 +53,7 @@ class CartIcon extends React.Component<Props> {
   };
 
   render() {
-    const {iconProps, navigation, count, configs} = this.props;
+    const { iconProps, navigation, count, configs } = this.props;
     const heightBadge = 16;
 
     const badgeStyle = {
@@ -76,7 +76,7 @@ class CartIcon extends React.Component<Props> {
           style={[
             styles.view,
             {
-              transform: [{scale: this.state.scale}],
+              transform: [{ scale: this.state.scale }],
             },
           ]}>
           <Badge
@@ -86,7 +86,8 @@ class CartIcon extends React.Component<Props> {
             value={count}
           />
         </Animated.View>
-        <Icon name="shopping-bag" size={20} {...iconProps} />
+        {/* <Icon name="shopping-bag" size={20} {...iconProps} /> */}
+        <Image style={{ height: 20, width: 20 }} source={require('../../assets/images/tabBar/shopping.png')}  ></Image>
       </TouchableOpacity>
     );
   }
@@ -117,5 +118,5 @@ const CartIconComponent = connect(mapStateToProps)(CartIcon);
 
 export default function (props) {
   const navigation = useNavigation();
-  return <CartIconComponent {...props} navigation={navigation}/>
+  return <CartIconComponent {...props} navigation={navigation} />
 };
