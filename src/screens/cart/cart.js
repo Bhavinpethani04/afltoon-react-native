@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import values from 'lodash/values';
 import includes from 'lodash/includes';
-import { StyleSheet, View, ActivityIndicator, I18nManager, Alert, FlatList } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, I18nManager, Alert, FlatList, ImageBackground } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { ThemedView, Header, Button, Loading } from 'src/components';
 import { TextHeader } from 'src/containers/HeaderComponent';
@@ -13,6 +13,7 @@ import Empty from 'src/containers/Empty';
 import CartTotal from './containers/CartTotal';
 import CartItem from './containers/CartItem';
 import Coupon from './containers/Coupon';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { getCart, removeFromCart, updateQuantityCart } from 'src/modules/cart/actions';
 import {
@@ -109,49 +110,54 @@ function CartScreen(props) {
   const goToProduct = (productId) => navigation.navigate(mainStack.product, { id: productId, type: 'product' });
 
   return (
-    <ThemedView style={{ backgroundColor: 'rgba(250,250,250,1)', height: '100%', width: '100%' }} isFullView>
-      <Loading visible={loadingRemove || loadingUpdate} />
-      <Header
-        centerComponent={
-          <TextHeader
-            title={t('common:text_cart')}
-            subtitle={subtitleHeader}
-          />
-        }
-      />
-      {loading ? (
-        <View style={styles.loading}>
-          <ActivityIndicator size="small" />
-        </View>
-      ) : (
-          <>
-            {count < 1 ? (
-              <Empty
-                icon="shopping-bag"
-                title={t('empty:text_title_cart')}
-                subTitle={t('empty:text_subtitle_cart')}
-                clickButton={() => navigation.navigate(homeTabs.shop)}
-              />
-            ) : (
-                <>
-                  <CartTotal style={styles.viewTotal} totals={totals} currency={currency} />
-                  <FlatList
-                    data={lists}
-                    keyExtractor={item => item.key}
-                    renderItem={({ item, index }) => {
-                      return (
-                        <CartItem
-                          item={item}
-                          currency={currency}
-                          updateQuantity={updateQuantity}
-                          goToProduct={goToProduct}
-                          deleteProduct={() => notificationDeleteItem(item.key)}
-                          style={index === 0 && styles.firstItem}
-                        />
-                      )
-                    }}
-                  />
-                  {/* <SwipeListView
+
+    <ThemedView style={{ height: '100%', width: '100%', alignSelf: 'center' }} isFullView>
+    <ImageBackground style={{height: '100%', width: '100%', }} source={require('../../assets/images/appBackground.png')}>
+
+
+        <Loading visible={loadingRemove || loadingUpdate} />
+        <Header
+          centerComponent={
+            <TextHeader
+              title={t('common:text_cart')}
+              subtitle={subtitleHeader}
+            />
+          }
+        />
+
+        {loading ? (
+          <View style={styles.loading}>
+            <ActivityIndicator size="small" />
+          </View>
+        ) : (
+            <>
+              {count < 1 ? (
+                <Empty
+                  icon="shopping-bag"
+                  title={t('empty:text_title_cart')}
+                  subTitle={t('empty:text_subtitle_cart')}
+                  clickButton={() => navigation.navigate(homeTabs.shop)}
+                />
+              ) : (
+                  <>
+                    <CartTotal style={styles.viewTotal} totals={totals} currency={currency} />
+                    <FlatList
+                      data={lists}
+                      keyExtractor={item => item.key}
+                      renderItem={({ item, index }) => {
+                        return (
+                          <CartItem
+                            item={item}
+                            currency={currency}
+                            updateQuantity={updateQuantity}
+                            goToProduct={goToProduct}
+                            deleteProduct={() => notificationDeleteItem(item.key)}
+                            style={index === 0 && styles.firstItem}
+                          />
+                        )
+                      }}
+                    />
+                    {/* <SwipeListView
                 useFlatList
                 removeClippedSubviews={false}
                 keyExtractor={item => item.key}
@@ -183,28 +189,32 @@ function CartScreen(props) {
                   </Container>
                 }
               /> */}
-                  <Container style={styles.footerScrollview}>
-                    <Button
-                      title={t('cart:text_go_checkout')}
-                      buttonStyle={styles.checkOutButton}
-                      titleStyle={{ width: '100%' }}
-                      onPress={() => {
-                        if (siteConfigs?.enable_guest_checkout === 'no' && !isLogin) {
-                          navigation.navigate(authStack.login);
-                        } else {
-                          navigation.navigate(mainStack.webview_checkout);
-                          // navigation.navigate(
-                          //   webviewCheckout ? mainStack.webview_checkout : mainStack.checkout,
-                          // );
-                        }
-                      }}
-                    />
-                  </Container>
-                </>
-              )}
-          </>
-        )}
+                    <Container style={styles.footerScrollview}>
+                      <Button
+                        title={t('cart:text_go_checkout')}
+                        buttonStyle={styles.checkOutButton}
+                        titleStyle={{ width: '100%' }}
+                        onPress={() => {
+                          if (siteConfigs?.enable_guest_checkout === 'no' && !isLogin) {
+                            navigation.navigate(authStack.login);
+                          } else {
+                            navigation.navigate(mainStack.webview_checkout);
+                            // navigation.navigate(
+                            //   webviewCheckout ? mainStack.webview_checkout : mainStack.checkout,
+                            // );
+                          }
+                        }}
+                      />
+                    </Container>
+                  </>
+                )}
+            </>
+          )}
+      </ImageBackground>
+
     </ThemedView>
+
+
   )
 }
 
@@ -213,6 +223,7 @@ const styles = StyleSheet.create({
     marginVertical: margin.base,
   },
   viewTotal: {
+    marginHorizontal:margin.large+15,
     marginTop: margin.large,
     marginBottom: margin.large - 2,
   },

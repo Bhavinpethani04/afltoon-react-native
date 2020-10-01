@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import unescape from 'lodash/unescape';
 import {withTranslation} from 'react-i18next';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ImageBackground} from 'react-native';
 import {ThemedView} from 'src/components';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import Search from 'src/screens/home/containers/Search';
 import Style1 from './category/Style1';
@@ -39,6 +40,8 @@ class CategoryScreen extends Component {
 
     return (
       <ThemedView isFullView style={styles.container}>
+        <ImageBackground style={{ height: hp(100), width: '100%', }} source={require('../../assets/images/appBackground.png')}>
+
         <View style={styles.viewSearch}>
           <Search
             fields={{
@@ -59,6 +62,7 @@ class CategoryScreen extends Component {
         ) : (
           <Style1 goProducts={this.goProducts} />
         )}
+        </ImageBackground>
       </ThemedView>
     );
   }
@@ -69,6 +73,7 @@ const styles = StyleSheet.create({
     paddingTop: getStatusBarHeight(),
   },
   viewSearch: {
+    marginHorizontal:wp(5),
     padding: padding.large,
   },
 });
