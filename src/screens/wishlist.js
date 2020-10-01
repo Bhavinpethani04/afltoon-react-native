@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import isEqual from 'lodash/isEqual';
-import { StyleSheet, View, ActivityIndicator, I18nManager, FlatList } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, I18nManager, FlatList, ImageBackground } from 'react-native';
 import { Header, ThemedView } from 'src/components';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ProductItem from 'src/containers/ProductItem';
@@ -18,6 +18,7 @@ import {
 } from 'src/modules/product/selectors';
 
 import { wishListSelector, countWishListSelector } from 'src/modules/common/selectors';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { margin } from 'src/components/config/spacing';
 import { homeTabs } from 'src/config/navigator';
@@ -105,19 +106,22 @@ class WishListScreen extends React.Component {
 
     return (
       <ThemedView style={styles.container}>
-        <Header
-          centerComponent={
-            <TextHeader title={t('common:text_wishList')} subtitle={subtitle} />
-          }
-          rightComponent={<CartIcon />}
-        />
-        {loading ? (
-          <View style={styles.viewLoading}>
-            <ActivityIndicator size="small" />
-          </View>
-        ) : (
-            this.renderData(data)
-          )}
+        <ImageBackground style={{ height: hp(100), width: '100%', }} source={require('../assets/images/appBackground.png')}>
+
+          <Header
+            centerComponent={
+              <TextHeader title={t('common:text_wishList')} subtitle={subtitle} />
+            }
+            rightComponent={<CartIcon />}
+          />
+          {loading ? (
+            <View style={styles.viewLoading}>
+              <ActivityIndicator size="small" />
+            </View>
+          ) : (
+              this.renderData(data)
+            )}
+        </ImageBackground>
       </ThemedView>
     );
   }
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
   },
   firstItem: {
     borderTopWidth: 1,
-    
+
   },
 });
 

@@ -7,7 +7,7 @@ import merge from 'lodash/merge';
 import unescape from 'lodash/unescape';
 import { withTranslation } from 'react-i18next';
 import { showMessage } from 'react-native-flash-message';
-import { StyleSheet, View, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { Text, ListItem, ThemedView, ThemeConsumer } from 'src/components';
 import Price from 'src/containers/Price';
 import Container from 'src/containers/Container';
@@ -15,6 +15,8 @@ import Rating from 'src/containers/Rating';
 import Empty from 'src/containers/Empty';
 import VendorHeaderDetail from 'src/containers/vendor/VendorHeaderDetail';
 import TextHtml from 'src/containers/TextHtml';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 import ScrollProductDetail from './product/ScrollProductDetail';
 import RelatedProducts from './containers/RelatedProducts';
@@ -198,7 +200,7 @@ class Product extends Component {
           product={p}
         // style={p.get('type') !== productType.SIMPLE && styles.viewStock}
         /> */}
-        <Text style={{ marginLeft:10, textDecorationLine: 'line-through', }}>$120</Text>
+        <Text style={{ marginLeft: 10, textDecorationLine: 'line-through', }}>$120</Text>
       </View>
     );
   };
@@ -266,6 +268,7 @@ class Product extends Component {
     const valueCheck = variation && variation.size > 0 ? variation : product;
 
     return (
+
       <ScrollProductDetail
         headerTitle={unescape(product.get('name'))}
         imageElement={
@@ -290,8 +293,12 @@ class Product extends Component {
           )
         }
         heightViewImage={HEADER_MAX_HEIGHT}>
-        <Container style={styles.container}>
-          {/*<View style={styles.viewCategoryRating}>
+        <ImageBackground style={{ height: hp(100), width: wp(100) }} source={require('../../assets/images/appBackground.png')}>
+
+          <View style={{ width: '85%', alignSelf: 'center' }} >
+
+            <Container style={styles.container}>
+              {/*<View style={styles.viewCategoryRating}>
             <CategoryName product={product} style={styles.textCategory} />
              {configs.get('toggleReviewProduct') ? (
               <TouchableOpacity
@@ -310,76 +317,76 @@ class Product extends Component {
               </TouchableOpacity>
             ) : null} 
           </View>*/}
-          <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-            <Text h2 medium style={styles.textName}>
-              {unescape(product.get('name'))}
-            </Text>
-            <TouchableOpacity>
-              <Image style={{ width: 16, height: 24, resizeMode: 'contain' }} source={require('../../assets/images/ic_turned_in_not_24px.png')} />
-            </TouchableOpacity>
-          </View>
+              <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                <Text h2 medium style={styles.textName}>
+                  {unescape(product.get('name'))}
+                </Text>
+                <TouchableOpacity>
+                  <Image style={{ width: 16, height: 24, resizeMode: 'contain' }} source={require('../../assets/images/ic_turned_in_not_24px.png')} />
+                </TouchableOpacity>
+              </View>
 
-          {this.showPrice()}
-          {/* {product.get('sku') ? (
+              {this.showPrice()}
+              {/* {product.get('sku') ? (
             <Text h6 medium style={styles.textName}>
               sku: {product.get('sku')}
             </Text>
           ) : null} */}
-          <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', flexDirection: 'row' }}>
-            <View style={{ width: '20%', height: '70%', backgroundColor: 'black', borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
-              <Text style={{ color: 'white', fontSize: 20, }}>4.5</Text>
-            </View>
-            <Text style={{ fontSize: 20, marginLeft: '5%' }}>Very Good</Text>
-            <Text style={{ fontSize: 17, marginLeft: '15%' }}>49 Reviews</Text>
+              <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', flexDirection: 'row' }}>
+                <View style={{ width: '20%', height: '70%', backgroundColor: 'black', borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
+                  <Text style={{ color: 'white', fontSize: 20, }}>4.5</Text>
+                </View>
+                <Text style={{ fontSize: 20, marginLeft: '5%' }}>Very Good</Text>
+                <Text style={{ fontSize: 17, marginLeft: '10%' }}>49 Reviews</Text>
 
-          </View>
-
-          <Text style={{ fontSize: 15, }}>Description</Text>
-
-          {configs.get('toggleShortDescriptionProduct') &&
-            product.get('short_description') ? (
-              <View style={styles.viewDescription}>
-                <ThemeConsumer>
-                  {({ theme }) => (
-                    <TextHtml
-                      value={product.get('short_description')}
-                      style={merge(
-                        changeSize('h6'),
-                        changeColor(theme.Text.third.color),
-                      )}
-                    />
-                  )}
-                </ThemeConsumer>
               </View>
-            ) : null}
-          <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-            <TouchableOpacity>
-              <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', }}>Select Size</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={{ fontSize: 20, marginLeft: '5%' }}>Select Color</Text>
-            </TouchableOpacity>
 
-          </View>
+              <Text style={{ fontSize: 15, }}>Description</Text>
 
-          <View style={{ width: '100%', height: 60, marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-            {
-              ["S", "M", "L"].map((item, index) => {
-                return (
-                  <TouchableOpacity style={{ height: 50, width: 50, backgroundColor:index==1 ? 'black' : 'rgba(241,241,241,1)', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginLeft:10 }}>
-                    <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', color:index==1?'white':'black' }}>{item}</Text>
-                  </TouchableOpacity>
-                )
-              })
-            }
-              <Text style={{ fontSize: 20, marginLeft: '5%' }}>XXL</Text>
+              {configs.get('toggleShortDescriptionProduct') &&
+                product.get('short_description') ? (
+                  <View style={styles.viewDescription}>
+                    <ThemeConsumer>
+                      {({ theme }) => (
+                        <TextHtml
+                          value={product.get('short_description')}
+                          style={merge(
+                            changeSize('h6'),
+                            changeColor(theme.Text.third.color),
+                          )}
+                        />
+                      )}
+                    </ThemeConsumer>
+                  </View>
+                ) : null}
+              <View style={{ width: '100%', height: 60, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor: 'gray', marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <TouchableOpacity>
+                  <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', }}>Select Size</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={{ fontSize: 20, marginLeft: '5%' }}>Select Color</Text>
+                </TouchableOpacity>
+
+              </View>
+
+              <View style={{ width: '100%', height: 60, marginBottom: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                {
+                  ["S", "M", "L"].map((item, index) => {
+                    return (
+                      <TouchableOpacity style={{ height: 50, width: 50, backgroundColor: index == 1 ? 'black' : 'rgba(241,241,241,1)', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginLeft: 10 }}>
+                        <Text style={{ fontSize: 20, marginLeft: '5%', fontWeight: 'normal', color: index == 1 ? 'white' : 'black' }}>{item}</Text>
+                      </TouchableOpacity>
+                    )
+                  })
+                }
+                <Text style={{ fontSize: 20, marginLeft: '5%' }}>XXL</Text>
 
 
 
-          </View>
+              </View>
 
-          {this.showInfoType()}
-          {/* <ListItem
+              {this.showInfoType()}
+              {/* <ListItem
             title={t('catalog:text_description')}
             onPress={() =>
               this.props.navigation.navigate(mainStack.product_description, {
@@ -391,7 +398,7 @@ class Product extends Component {
             type="underline"
           /> */}
 
-          {/* {product.get('attributes') && product.get('attributes').size ? (
+              {/* {product.get('attributes') && product.get('attributes').size ? (
             <ListItem
               title={t('catalog:text_information')}
               onPress={() =>
@@ -405,7 +412,7 @@ class Product extends Component {
             />
           ) : null} */}
 
-          {/* {configs.get('toggleReviewProduct') ? (
+              {/* {configs.get('toggleReviewProduct') ? (
             <ListItem
               title={t('catalog:text_reviews')}
               onPress={() =>
@@ -420,14 +427,17 @@ class Product extends Component {
               type="underline"
             />
           ) : null} */}
-          {vendorDetail && vendorDetail.size > 0 ? (
-            <VendorHeaderDetail
-              store={vendorDetail.toJS()}
-              style={styles.vendor}
-              onPress={() => navigation.navigate(mainStack.store_detail)}
-            />
-          ) : null}
-        </Container>
+              {vendorDetail && vendorDetail.size > 0 ? (
+                <VendorHeaderDetail
+                  store={vendorDetail.toJS()}
+                  style={styles.vendor}
+                  onPress={() => navigation.navigate(mainStack.store_detail)}
+                />
+              ) : null}
+            </Container>
+          </View>
+        </ImageBackground>
+
         {/* {related_ids.length ? (
           <View style={styles.viewRelated}>
             <RelatedProducts data={related_ids.join(',')} />

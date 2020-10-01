@@ -41,7 +41,7 @@ class GetStartScreen extends React.Component {
         )} */}
         <ImageBackground style={styles.container} source={require('../assets/images/appBackground.png')} >
 
-          <Image style={styles.logoStyle} source={require('../assets/images/logo.png')} ></Image>
+          <Image style={styles.logoStyle} source={require('../assets/images/alftoonMarketing.png')} ></Image>
 
           <View style={styles.outlineButtonMainView}>
             <Button
@@ -78,7 +78,7 @@ class GetStartScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: { height: height, width: width, alignItems: 'center' },
-  logoStyle: { width: wp(60), height: hp(15), marginTop: hp(15), resizeMode: 'contain' },
+  logoStyle: { width: wp(70), height: hp(15), marginTop: hp(15), resizeMode: 'contain' },
   outlineButtonMainView: {
     flexDirection: 'row',
     width: '70%',
