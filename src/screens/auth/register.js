@@ -250,16 +250,7 @@ class RegisterScreen extends React.Component {
                     onChangeText={(value) => this.changeData({name: value})}
                     error={errors && errors.name}
                   />
-                  {enablePhoneNumber ? (
-                    <InputMobile
-                      value={phone_number}
-                      initialCountry={INITIAL_COUNTRY}
-                      onChangePhoneNumber={({value, code, isoCode}) =>
-                        this.changeData({phone_number: value, country_no: code, country_code: isoCode,})
-                      }
-                      error={errors && errors.phone_number}
-                    />
-                  ) : null}
+                  
                   <Input
                     label={t('auth:text_input_email')}
                     value={email}
@@ -275,7 +266,7 @@ class RegisterScreen extends React.Component {
                   /> */}
 
 
-                    <Text style={styles.textInputLabel} >Name</Text>
+                    <Text style={styles.textInputLabel}>Name</Text>
                     <TextInput
                       placeholder={'Username'}
                       value={first_name}
@@ -285,7 +276,7 @@ class RegisterScreen extends React.Component {
                       style={styles.textInputOuterStyle} >
                     </TextInput>
 
-                    <Text style={styles.textInputLabel} >Email</Text>
+                    <Text style={styles.textInputLabel}>Email</Text>
                     <TextInput
                       placeholder={'Username'}
                       value={last_name}
@@ -295,8 +286,21 @@ class RegisterScreen extends React.Component {
                       style={styles.textInputOuterStyle} >
                     </TextInput>
 
+                    <Text style={styles.textInputLabel}>Mobile</Text>
 
-                    <Text style={styles.textInputLabel} >Password</Text>
+                    {enablePhoneNumber ? (
+                      <InputMobile
+                        style={styles.textInputOuterStyle}
+                        value={phone_number}
+                        initialCountry={INITIAL_COUNTRY}
+                        onChangePhoneNumber={({ value, code, isoCode }) =>
+                          this.changeData({ phone_number: value, country_no: code, country_code: isoCode, })
+                        }
+                        error={errors && errors.phone_number}
+                      />
+                    ) : null}
+
+                    <Text style={styles.textInputLabel}>Password</Text>
                     <View style={styles.textInputOuterStyle}>
                       <TextInput
                         placeholder={'Password'}

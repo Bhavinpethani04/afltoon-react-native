@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { StatusBar, ImageBackground, Dimensions, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { StatusBar, ImageBackground, Dimensions, StyleSheet, View, Image, TouchableOpacity, Alert } from 'react-native';
 import GetStartSwiper from 'src/containers/GetStartSwiper';
 import GetStartVideo from 'src/containers/GetStartVideo';
-
+import { CommonActions, StackActions } from '@react-navigation/native';
 import { closeGettingStarted } from 'src/modules/common/actions';
 import {
   Header,
@@ -16,6 +16,7 @@ import {
 } from 'src/components';
 import { mainStack, rootSwitch, authStack } from 'src/config/navigator';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+// import { NavigationAction, StackActions,  } from '@react-navigation/native';
 
 
 const ENABLE_VIDEO = false;
@@ -29,6 +30,11 @@ class GetStartScreen extends React.Component {
     handleCloseGettingStarted();
     // this.props.navigation.navigate(rootSwitch.main, { screen: mainStack.home_tab })
   };
+  handleSignup = () => {
+    this.props.navigation.navigate(rootSwitch.auth, { screen: authStack.register })
+
+    this.props.navigation.navigate("RegisterScreen")  
+  }
 
   render() {
     return (
@@ -67,7 +73,8 @@ class GetStartScreen extends React.Component {
               buttonStyle={[styles.fillUpButtonStyle, { marginTop: hp(3) }]}
             />
           </View>
-          <TouchableOpacity>
+
+          <TouchableOpacity onPress={this.handleSignup}>
             <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
         </ImageBackground>
