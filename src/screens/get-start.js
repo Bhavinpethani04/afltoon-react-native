@@ -33,7 +33,7 @@ class GetStartScreen extends React.Component {
   handleSignup = () => {
     this.props.navigation.navigate(rootSwitch.auth, { screen: authStack.register })
 
-    this.props.navigation.navigate("RegisterScreen")  
+    // this.props.navigation.navigate("RegisterScreen")  
   }
 
   render() {
