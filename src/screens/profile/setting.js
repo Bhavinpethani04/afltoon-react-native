@@ -33,7 +33,7 @@ class SettingScreen extends React.Component {
         <Container>
           <Language title={t('profile:text_language')} />
           <Currency title={t('profile:text_currency')} />
-          <ConfigAdvanced title={t('profile:text_config_advanced')} />
+          {/* <ConfigAdvanced title={t('profile:text_config_advanced')} /> */}
           <ListItem
             title={t('profile:text_dark')}
             type="underline"

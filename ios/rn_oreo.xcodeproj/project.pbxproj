@@ -75,7 +75,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* rn_oreoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rn_oreoTests.m; sourceTree = "<group>"; };
 		0649A5B9F79A87C17CA3EEFE /* Pods-rn_oreo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_oreo.debug.xcconfig"; path = "Target Support Files/Pods-rn_oreo/Pods-rn_oreo.debug.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Alftoon Fashion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alftoon Fashion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Alftoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alftoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = rn_oreo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = rn_oreo/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Alftoon Fashion.app */,
+				13B07F961A680F5B00A75B9A /* Alftoon.app */,
 				00E356EE1AD99517003FC87E /* rn_oreoTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* rn_oreo-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* rn_oreo-tvOSTests.xctest */,
@@ -355,7 +355,7 @@
 			);
 			name = rn_oreo;
 			productName = rn_oreo;
-			productReference = 13B07F961A680F5B00A75B9A /* Alftoon Fashion.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Alftoon.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* rn_oreo-tvOS */ = {
@@ -952,7 +952,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = oreo.rnlab.io;
-				PRODUCT_NAME = "Alftoon Fashion";
+				PRODUCT_NAME = Alftoon;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -978,7 +978,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = oreo.rnlab.io;
-				PRODUCT_NAME = "Alftoon Fashion";
+				PRODUCT_NAME = Alftoon;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

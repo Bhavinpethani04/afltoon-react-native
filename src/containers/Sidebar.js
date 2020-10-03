@@ -28,14 +28,14 @@ class Sidebar extends React.Component {
   render() {
     const { t, category, configs, language, navigation } = this.props;
     const dataHelpInfo = [
-      {
-        id: '1',
-        name: t('common:text_home'),
-        router: mainStack.home_tab,
-        params: {
-          screen: homeTabs.home_drawer,
-        },
-      },
+      // {
+      //   id: '1',
+      //   name: t('common:text_home'),
+      //   router: mainStack.home_tab,
+      //   params: {
+      //     screen: homeTabs.home_drawer,
+      //   },
+      // },
       {
         id: '2',
         name: t('common:text_blogs'),
@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
     return (
       // <ThemedView isFullView>
       <ImageBackground style={{ height: hp(100), width: '100%' }} resizeMode={'stretch'} source={require('../assets/images/appBackground.png')} >
-        <View style={{ width: '75%', alignSelf: 'center' }} >
+        <View style={{ width: '80%', alignSelf: 'center' }} >
           <ScrollView>
             <Text h3 medium style={[styles.title, styles.titleHead]}>
               Settings

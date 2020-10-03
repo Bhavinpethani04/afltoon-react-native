@@ -226,7 +226,7 @@ class RegisterScreen extends React.Component {
                     />
                   ) : null}
 
-                  <View style={{ width: '75%', alignSelf: 'center' }} >
+                  <View style={{ width: '80%', alignSelf: 'center' }} >
                     <Text style={styles.signUpLebel}>Sign Up</Text>
                     {/* <Input
                     label={t('auth:text_input_first_name')}

@@ -89,7 +89,7 @@ class LoginScreen extends React.Component {
                     />
                   ) : null}
 
-                  <View style={{ width: '75%', alignSelf: 'center' }} >
+                  <View style={{ width: '80%', alignSelf: 'center' }} >
                     <Text style={styles.loginLebel} >Login</Text>
 
                     <Text style={[styles.textInputLabel, { marginTop: hp(10) }]} >Email</Text>
