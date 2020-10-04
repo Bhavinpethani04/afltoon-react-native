@@ -365,13 +365,13 @@ class RegisterScreen extends React.Component {
                   </View>
                   {/* <SocialMethods style={styles.viewAccount} /> */}
 
-                  {/* <Text
+                  <Text
                     medium
                     style={styles.textHaveAccount}
                     onPress={() => navigation.navigate(authStack.login)}>
                     {t('auth:text_already_account')}
-                  </Text> */}
-                  {/* <ModalVerify
+                  </Text>
+                  <ModalVerify
                     visible={visible}
                     type={'register'}
                     phone={
@@ -388,7 +388,7 @@ class RegisterScreen extends React.Component {
                         confirmResult: null,
                       })
                     }
-                  /> */}
+                  />
                 </Container>
               </ScrollView>
             </KeyboardAvoidingView>
