@@ -18,12 +18,9 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* rn_oreoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_oreoTests.m */; };
 		7DA94FA674737E314BFF1212 /* libPods-rn_oreo-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 635746A4C717A6DFE9009247 /* libPods-rn_oreo-tvOSTests.a */; };
-		A5BA7A5DC6424611DC9C88FE /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19945DD699201D3199BDE5AF /* libPods-OneSignalNotificationServiceExtension.a */; };
 		B10277C4151CF9DA3F78656A /* libPods-rn_oreo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70D379BFE9DAACC3A929A44 /* libPods-rn_oreo.a */; };
 		B9D20ABEA3470A1501B2EB20 /* libPods-rn_oreo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA721F957995F0CC4FAA06ED /* libPods-rn_oreo-tvOS.a */; };
 		E239CFE924E67083006C0AA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E239CFE824E67083006C0AA3 /* GoogleService-Info.plist */; };
-		E2634D8D248F19C800AECBEF /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = E2634D8C248F19C800AECBEF /* NotificationService.m */; };
-		E2634D91248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E2634D89248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E2634DA6248F1CA400AECBEF /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C833DDEE59A4E31822B647A /* Poppins-Light.ttf */; };
 		E2634DA7248F1CA400AECBEF /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 747ECB254C8A45CAB24C84EA /* Poppins-Medium.ttf */; };
 		E2634DA8248F1CA400AECBEF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 342F26E965504A06A89F7180 /* Poppins-Regular.ttf */; };
@@ -46,13 +43,6 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "rn_oreo-tvOS";
 		};
-		E2634D8F248F19C800AECBEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E2634D88248F19C800AECBEF;
-			remoteInfo = OneSignalNotificationServiceExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,7 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E2634D91248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +93,7 @@
 		7E2482533F31437AA4CA63F1 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		8628BDE907524C1CB9D1A86E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		88085CD9B40F4A73B0DD12E4 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		88FC297E2538A89000F859BB /* Alftoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Alftoon.entitlements; path = rn_oreo/Alftoon.entitlements; sourceTree = "<group>"; };
 		89343B46996615CA5D29A0ED /* Pods-rn_oreo-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_oreo-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-rn_oreo-tvOS/Pods-rn_oreo-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A10B18111FB24D4BBE606077 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		A52099ACEC4BBB1287CCC9D1 /* Pods-rn_oreo-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_oreo-tvOS.release.xcconfig"; path = "Target Support Files/Pods-rn_oreo-tvOS/Pods-rn_oreo-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +104,6 @@
 		D10D575220751EE84654DF1C /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		E239CFE824E67083006C0AA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2634D84248F188000AECBEF /* Oreo Fashion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Oreo Fashion.entitlements"; path = "rn_oreo/Oreo Fashion.entitlements"; sourceTree = "<group>"; };
-		E2634D89248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2634D8B248F19C800AECBEF /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		E2634D8C248F19C800AECBEF /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		E2634D8E248F19C800AECBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,14 +151,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E2634D86248F19C800AECBEF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A5BA7A5DC6424611DC9C88FE /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -193,6 +174,7 @@
 		13B07FAE1A68108700A75B9A /* rn_oreo */ = {
 			isa = PBXGroup;
 			children = (
+				88FC297E2538A89000F859BB /* Alftoon.entitlements */,
 				E239CFE824E67083006C0AA3 /* GoogleService-Info.plist */,
 				E2634DAA248F1DC800AECBEF /* splash.png */,
 				E2634D84248F188000AECBEF /* Oreo Fashion.entitlements */,
@@ -296,7 +278,6 @@
 				00E356EE1AD99517003FC87E /* rn_oreoTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* rn_oreo-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* rn_oreo-tvOSTests.xctest */,
-				E2634D89248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -351,7 +332,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E2634D90248F19C800AECBEF /* PBXTargetDependency */,
 			);
 			name = rn_oreo;
 			productName = rn_oreo;
@@ -397,24 +377,6 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* rn_oreo-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E2634D88248F19C800AECBEF /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E2634D95248F19C800AECBEF /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				AFE4BE103529E17641FA260B /* [CP] Check Pods Manifest.lock */,
-				E2634D85248F19C800AECBEF /* Sources */,
-				E2634D86248F19C800AECBEF /* Frameworks */,
-				E2634D87248F19C800AECBEF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = E2634D89248F19C800AECBEF /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -425,11 +387,13 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 8665ABN37M;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = F3PBLAQ75H;
+						DevelopmentTeam = 8665ABN37M;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -439,11 +403,6 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
-					};
-					E2634D88248F19C800AECBEF = {
-						CreatedOnToolsVersion = 11.5;
-						DevelopmentTeam = F3PBLAQ75H;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -464,7 +423,6 @@
 				00E356ED1AD99517003FC87E /* rn_oreoTests */,
 				2D02E47A1E0B4A5D006451C7 /* rn_oreo-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* rn_oreo-tvOSTests */,
-				E2634D88248F19C800AECBEF /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -501,13 +459,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E2634D87248F19C800AECBEF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -617,28 +568,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn_oreo-rn_oreoTests/Pods-rn_oreo-rn_oreoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AFE4BE103529E17641FA260B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C5BF001CDFC7199D0E761BB1 /* [CP] Copy Pods Resources */ = {
@@ -844,14 +773,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E2634D85248F19C800AECBEF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E2634D8D248F19C800AECBEF /* NotificationService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -864,11 +785,6 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* rn_oreo-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
-		};
-		E2634D90248F19C800AECBEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E2634D88248F19C800AECBEF /* OneSignalNotificationServiceExtension */;
-			targetProxy = E2634D8F248F19C800AECBEF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -890,6 +806,7 @@
 			baseConfigurationReference = EA2CA68D854930B35560F89C /* Pods-rn_oreo-rn_oreoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8665ABN37M;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -914,6 +831,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 8665ABN37M;
 				INFOPLIST_FILE = rn_oreoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -934,9 +852,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "rn_oreo/Oreo Fashion.entitlements";
-				CURRENT_PROJECT_VERSION = 88;
-				DEVELOPMENT_TEAM = F3PBLAQ75H;
+				CODE_SIGN_ENTITLEMENTS = rn_oreo/Alftoon.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alfoton Mohammed Y A AL-Janahi (8665ABN37M)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8665ABN37M;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -945,7 +865,7 @@
 				INFOPLIST_FILE = rn_oreo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -953,6 +873,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alftoon;
 				PRODUCT_NAME = Alftoon;
+				PROVISIONING_PROFILE_SPECIFIER = alftoon_dist;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -965,13 +886,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "rn_oreo/Oreo Fashion.entitlements";
-				CURRENT_PROJECT_VERSION = 88;
-				DEVELOPMENT_TEAM = F3PBLAQ75H;
+				CODE_SIGN_ENTITLEMENTS = rn_oreo/Alftoon.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alfoton Mohammed Y A AL-Janahi (8665ABN37M)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8665ABN37M;
 				INFOPLIST_FILE = rn_oreo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -979,6 +902,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alftoon;
 				PRODUCT_NAME = Alftoon;
+				PROVISIONING_PROFILE_SPECIFIER = alftoon_dist;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1207,62 +1131,6 @@
 			};
 			name = Release;
 		};
-		E2634D93248F19C800AECBEF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D10D575220751EE84654DF1C /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 87;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = F3PBLAQ75H;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.0.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = oreo.rnlab.io.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		E2634D94248F19C800AECBEF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C529C228B988755DB3B3C33 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 87;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = F3PBLAQ75H;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.0.4;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = oreo.rnlab.io.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1307,15 +1175,6 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E2634D95248F19C800AECBEF /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E2634D93248F19C800AECBEF /* Debug */,
-				E2634D94248F19C800AECBEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
