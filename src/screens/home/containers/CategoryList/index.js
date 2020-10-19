@@ -129,7 +129,13 @@ class CategoryList extends Component {
             {dataShow.map((item, inx) => {
               return (
                 <TouchableOpacity style={[styles.categoryCellMainView, { width: widthImage, marginLeft: inx != 0 ? 15 : 0 }]} onPress={() => this.goToProducts(item)} >
-                  <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.categoryCellImageBackground, { width: widthImage }]} source={{ uri: item.image.src }}  >
+                  <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.categoryCellImageBackground, { width: widthImage }]}
+                    source={item && item.image && item.image.src
+                      ? {
+                        uri: item.image.src,
+                        cache: 'reload',
+                      }
+                      : null}  >
                     <View style={styles.categoryViewShedowView}>
                       <Text bold style={styles.categoryText} >{item.name}</Text>
                     </View>

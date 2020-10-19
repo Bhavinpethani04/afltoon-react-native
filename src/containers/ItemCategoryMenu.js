@@ -43,7 +43,7 @@ class ItemCategoryMenu extends React.Component {
 
     const { categories } = category;
     const data = excludeCategory(categories, exclude_categories_sidebar);
-
+    
     return (
       <>
         <ListItem

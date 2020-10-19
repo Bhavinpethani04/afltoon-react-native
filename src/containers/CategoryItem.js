@@ -62,6 +62,7 @@ const CategoryItem = (props: Props) => {
       }
       style={[{width: widthTouch}, style && style]}>
       <View style={viewBorder}>
+        {console.log('avse k nai')}
         <Image
           source={
             item && item.image && item.image.src
